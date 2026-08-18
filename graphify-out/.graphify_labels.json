@@ -26,5 +26,17 @@
   "24": "schemas/__init__.py",
   "25": "services/__init__.py",
   "26": "tasks/__init__.py",
-  "27": "extract_printers_v2.py"
+  "27": "extract_printers_v2.py",
+  "28": "PrinterDetailsModal.tsx",
+  "29": "Sidebar.tsx",
+  "30": "types.ts",
+  "31": "printers.ts",
+  "32": "Login.tsx",
+  "33": "useToast",
+  "34": "TonerMonitoring.tsx",
+  "35": "toast.tsx",
+  "36": "services",
+  "37": "layout.tsx",
+  "38": "theme.tsx",
+  "39": "PrinterRanking.tsx"
 }
