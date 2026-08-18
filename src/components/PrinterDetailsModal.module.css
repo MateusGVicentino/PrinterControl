@@ -1,0 +1,276 @@
+.factLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-faint);
+}
+
+.factValue {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.footerButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: background-color 0.15s;
+}
+
+.footerButton:hover {
+  background: var(--color-surface-2);
+}
+
+.footerLinkPrimary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-brand);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.15s;
+}
+
+.footerLinkPrimary:hover {
+  background: var(--color-brand-600);
+}
+
+.infoCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--color-surface-2);
+  padding: 1rem;
+}
+
+.infoIcon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--color-brand-tint);
+  color: var(--color-brand-700);
+}
+
+.infoText {
+  min-width: 0;
+  flex: 1;
+}
+
+.infoIp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.infoDept {
+  font-size: 13px;
+  color: var(--color-ink-soft);
+}
+
+.factsGrid {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .factsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.monthlyBlock {
+  margin-top: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  padding: 1rem;
+}
+
+.monthlyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.monthlyLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-faint);
+}
+
+.monthlyBadge {
+  border-radius: 999px;
+  background: var(--color-brand-tint);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.monthlyPeriod {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-ink-faint);
+}
+
+.monthlyBars {
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.monthlyBarButton {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.monthlyBarValue {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.monthlyBarValueActive {
+  color: var(--color-brand-700);
+}
+
+.monthlyBarValueInactive {
+  color: var(--color-ink-faint);
+}
+
+.monthlyBar {
+  width: 100%;
+  border-radius: 0.375rem 0.375rem 0 0;
+  transition: background-color 0.15s;
+}
+
+.monthlyBarActive {
+  background: var(--color-brand);
+}
+
+.monthlyBarInactive {
+  background: var(--color-surface-sunken);
+}
+
+.monthlyBarInactive:hover {
+  background: var(--color-border-strong);
+}
+
+.monthlyBarLabel {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.monthlyBarLabelActive {
+  color: var(--color-ink);
+}
+
+.monthlyBarLabelInactive {
+  color: var(--color-ink-faint);
+}
+
+.tonerBlock {
+  margin-top: 1.25rem;
+}
+
+.tonerBlockLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-faint);
+}
+
+.tonerBlockList {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tonerRow {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.tonerRowLabel {
+  color: var(--color-ink-soft);
+}
+
+.tonerRowPercent {
+  font-weight: 600;
+}
+
+.tonerTrack {
+  height: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-sunken);
+}
+
+.tonerFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.recommendation {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-warning) 25%, transparent);
+  background: var(--color-warning-tint);
+  padding: 1rem;
+}
+
+.recommendationIcon {
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+  color: var(--color-warning);
+}
+
+.recommendationTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.recommendationText {
+  margin-top: 0.125rem;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+}

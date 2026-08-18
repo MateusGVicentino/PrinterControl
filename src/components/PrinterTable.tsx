@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Dependências externas: react (paginação/view state) e lucide-react
  * (ícones). Dependências locais: PrinterStatusBadge, lib/tonerColor,
@@ -28,6 +30,8 @@ import type { PrinterStatus } from "../types";
 import type { PrinterType } from "../lib/printerType";
 import { useToast } from "../lib/toast";
 import { useTheme } from "../lib/theme";
+import { cn } from "../lib/cn";
+import styles from "./PrinterTable.module.css";
 
 interface PrinterTableProps {
   printers: Printer[];
@@ -87,16 +91,16 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
   ];
 
   return (
-    <div className="min-w-0 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex flex-col gap-4 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between">
+    <div className={styles.root}>
+      <div className={styles.headerRow}>
         <div>
-          <h3 className="text-[15px] font-bold text-ink">Impressoras</h3>
-          <p className="text-[13px] text-ink-faint">
+          <h3 className={styles.title}>Impressoras</h3>
+          <p className={styles.subtitle}>
             {printers.length} de {totalCount} resultados
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-surface-2 px-3 py-2 text-ink-faint">
+        <div className={styles.controls}>
+          <div className={styles.searchBox}>
             <Search size={15} />
             <input
               value={filters.query}
@@ -105,30 +109,31 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
                 setPage(1);
               }}
               placeholder="Pesquisar..."
-              className="w-36 bg-transparent text-ink placeholder:text-ink-faint focus:outline-none sm:w-44"
+              className={styles.searchInput}
             />
           </div>
           <button
             onClick={() => setShowFilters((s) => !s)}
-            className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-sm font-medium transition-colors ${
+            className={cn(
+              styles.filterButton,
               showFilters || filters.status !== "Todos" || filters.type !== "Todos"
-                ? "border-brand/40 bg-brand-tint text-brand-700"
-                : "border-border bg-surface-2 text-ink hover:bg-surface-sunken"
-            }`}
+                ? styles.filterButtonActive
+                : styles.filterButtonInactive
+            )}
           >
             <SlidersHorizontal size={15} />
             Filtros
           </button>
-          <div className="flex items-center gap-1 rounded-xl border border-border bg-surface-2 p-1">
+          <div className={styles.viewToggle}>
             <button
               onClick={() => setView("list")}
-              className={`rounded-lg p-1.5 ${view === "list" ? "bg-brand text-white" : "text-ink-faint hover:text-ink"}`}
+              className={cn(styles.viewButton, view === "list" ? styles.viewButtonActive : styles.viewButtonInactive)}
             >
               <Rows3 size={16} />
             </button>
             <button
               onClick={() => setView("grid")}
-              className={`rounded-lg p-1.5 ${view === "grid" ? "bg-brand text-white" : "text-ink-faint hover:text-ink"}`}
+              className={cn(styles.viewButton, view === "grid" ? styles.viewButtonActive : styles.viewButtonInactive)}
             >
               <LayoutGrid size={16} />
             </button>
@@ -137,10 +142,10 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
       </div>
 
       {showFilters && (
-        <div className="flex flex-wrap items-center gap-5 border-b border-border bg-surface-2/60 px-5 py-3.5">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Status</span>
-            <div className="flex gap-1.5">
+        <div className={styles.filtersPanel}>
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Status</span>
+            <div className={styles.filterPillRow}>
               {statusOptions.map((opt) => (
                 <button
                   key={opt.value}
@@ -148,18 +153,16 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
                     onFilterChange("status", opt.value);
                     setPage(1);
                   }}
-                  className={`rounded-full px-2.5 py-1 text-[12px] font-medium ${
-                    filters.status === opt.value ? "bg-brand text-white" : "bg-surface text-ink-soft hover:bg-surface-sunken"
-                  }`}
+                  className={cn(styles.filterPill, filters.status === opt.value ? styles.filterPillActive : styles.filterPillInactive)}
                 >
                   {opt.label}
                 </button>
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Tipo</span>
-            <div className="flex gap-1.5">
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>Tipo</span>
+            <div className={styles.filterPillRow}>
               {typeOptions.map((opt) => (
                 <button
                   key={opt.value}
@@ -167,9 +170,7 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
                     onFilterChange("type", opt.value);
                     setPage(1);
                   }}
-                  className={`rounded-full px-2.5 py-1 text-[12px] font-medium ${
-                    filters.type === opt.value ? "bg-brand text-white" : "bg-surface text-ink-soft hover:bg-surface-sunken"
-                  }`}
+                  className={cn(styles.filterPill, filters.type === opt.value ? styles.filterPillActive : styles.filterPillInactive)}
                 >
                   {opt.label}
                 </button>
@@ -180,72 +181,68 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
       )}
 
       {view === "list" ? (
-        <div className="overflow-x-auto">
-          <table className={`w-full border-collapse text-sm ${compact ? "min-w-[560px]" : "min-w-[680px]"}`}>
+        <div className={styles.tableWrap}>
+          <table className={cn(styles.table, compact && styles.tableCompact)}>
             <thead>
-              <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-                <th className="px-5 py-3">Nome</th>
-                <th className="px-3 py-3">IP</th>
-                {!compact && <th className="px-3 py-3">Modelo</th>}
-                <th className="px-3 py-3">Departamento</th>
-                <th className="px-3 py-3">Toner</th>
-                <th className="px-3 py-3">Status</th>
-                {!compact && <th className="px-3 py-3">Ações</th>}
+              <tr className={styles.theadRow}>
+                <th className={styles.thFirst}>Nome</th>
+                <th className={styles.th}>IP</th>
+                {!compact && <th className={styles.th}>Modelo</th>}
+                <th className={styles.th}>Departamento</th>
+                <th className={styles.th}>Toner</th>
+                <th className={styles.th}>Status</th>
+                {!compact && <th className={styles.th}>Ações</th>}
               </tr>
             </thead>
             <tbody>
               {pageItems.map((p) => (
-                <tr
-                  key={p.id}
-                  onClick={() => onOpenDetails(p)}
-                  className="cursor-pointer border-t border-border transition-colors hover:bg-surface-2"
-                >
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+                <tr key={p.id} onClick={() => onOpenDetails(p)} className={styles.row}>
+                  <td className={styles.tdFirst}>
+                    <div className={styles.nameCell}>
+                      <div className={styles.iconWrap}>
                         <PrinterIcon size={16} />
                       </div>
-                      <span className="font-semibold text-ink">{p.name}</span>
+                      <span className={styles.nameText}>{p.name}</span>
                     </div>
                   </td>
-                  <td className="px-3 py-3.5 text-ink-soft">{p.ip}</td>
+                  <td className={styles.td}>{p.ip}</td>
                   {!compact && (
-                    <td className="max-w-[130px] truncate px-3 py-3.5 text-ink-soft" title={p.model}>
+                    <td className={styles.tdModel} title={p.model}>
                       {p.model}
                     </td>
                   )}
-                  <td className={`truncate px-3 py-3.5 text-ink-soft ${compact ? "max-w-[100px]" : "max-w-[120px]"}`} title={p.department}>
+                  <td className={cn(styles.tdDept, compact ? styles.tdDeptCompact : styles.tdDeptFull)} title={p.department}>
                     {p.department}
                   </td>
-                  <td className="px-3 py-3.5">
+                  <td className={styles.td}>
                     {p.toner ? (
-                      <div className="flex items-center gap-1.5 whitespace-nowrap" title={`${p.toner[0].label}: ${p.toner[0].percent}%`}>
-                        <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: tonerChannelColor(p.toner[0].color, theme) }} />
-                        <span className="text-sm font-semibold" style={{ color: tonerLevelColor(p.toner[0].percent) }}>
+                      <div className={styles.tonerRow} title={`${p.toner[0].label}: ${p.toner[0].percent}%`}>
+                        <span className={styles.tonerDot} style={{ backgroundColor: tonerChannelColor(p.toner[0].color, theme) }} />
+                        <span className={styles.tonerPercent} style={{ color: tonerLevelColor(p.toner[0].percent) }}>
                           {p.toner[0].percent}%
                         </span>
                         {p.toner[0].percent <= 20 && <TriangleAlert size={12} style={{ color: tonerLevelColor(p.toner[0].percent) }} />}
                       </div>
                     ) : (
-                      <span className="text-ink-faint">N/A</span>
+                      <span className={styles.naText}>N/A</span>
                     )}
                   </td>
-                  <td className="px-3 py-3.5">
+                  <td className={styles.td}>
                     <PrinterStatusBadge status={p.status} />
                   </td>
                   {!compact && (
-                    <td className="px-3 py-3.5">
-                      <div className="flex items-center gap-1 text-ink-faint">
-                        <button onClick={() => onOpenDetails(p)} className="rounded-lg p-1.5 hover:bg-surface-sunken hover:text-ink" title="Detalhes">
+                    <td className={styles.td}>
+                      <div className={styles.actionsRow}>
+                        <button onClick={() => onOpenDetails(p)} className={styles.actionButton} title="Detalhes">
                           <FileText size={15} />
                         </button>
-                        <button onClick={(e) => handleWebAccess(p, e)} className="rounded-lg p-1.5 hover:bg-surface-sunken hover:text-ink" title="Acessar via web">
+                        <button onClick={(e) => handleWebAccess(p, e)} className={styles.actionButton} title="Acessar via web">
                           <Globe size={15} />
                         </button>
-                        <button onClick={(e) => handleTestPage(p, e)} className="rounded-lg p-1.5 hover:bg-surface-sunken hover:text-ink" title="Imprimir teste">
+                        <button onClick={(e) => handleTestPage(p, e)} className={styles.actionButton} title="Imprimir teste">
                           <PrinterIcon size={15} />
                         </button>
-                        <button onClick={(e) => handleSettings(p, e)} className="rounded-lg p-1.5 hover:bg-surface-sunken hover:text-ink" title="Configurações">
+                        <button onClick={(e) => handleSettings(p, e)} className={styles.actionButton} title="Configurações">
                           <Settings size={15} />
                         </button>
                       </div>
@@ -255,7 +252,7 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
               ))}
               {pageItems.length === 0 && (
                 <tr>
-                  <td colSpan={compact ? 5 : 7} className="px-5 py-12 text-center text-ink-faint">
+                  <td colSpan={compact ? 5 : 7} className={styles.emptyState}>
                     Nenhuma impressora encontrada com esses filtros.
                   </td>
                 </tr>
@@ -264,69 +261,57 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
           </table>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className={styles.gridView}>
           {pageItems.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => onOpenDetails(p)}
-              className="rounded-2xl border border-border bg-canvas p-4 text-left transition-shadow hover:shadow-md"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+            <button key={p.id} onClick={() => onOpenDetails(p)} className={styles.gridCard}>
+              <div className={styles.gridCardHead}>
+                <div className={styles.gridCardHeadLeft}>
+                  <div className={styles.gridCardIcon}>
                     <PrinterIcon size={16} />
                   </div>
-                  <p className="text-sm font-semibold text-ink">{p.name}</p>
+                  <p className={styles.gridCardName}>{p.name}</p>
                 </div>
                 <PrinterStatusBadge status={p.status} />
               </div>
-              <div className="mt-3 space-y-1 text-xs text-ink-faint">
+              <div className={styles.gridCardMeta}>
                 <p>
                   {p.ip} · {p.model}
                 </p>
                 <p>{p.department}</p>
               </div>
               {p.toner && (
-                <div className="mt-3">
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-sunken">
+                <div className={styles.gridCardToner}>
+                  <div className={styles.gridCardTonerTrack}>
                     <div
-                      className="h-full rounded-full"
+                      className={styles.gridCardTonerFill}
                       style={{ width: `${p.toner[0].percent}%`, backgroundColor: tonerChannelColor(p.toner[0].color, theme) }}
                     />
                   </div>
-                  <p className="mt-1 text-xs font-semibold" style={{ color: tonerLevelColor(p.toner[0].percent) }}>
+                  <p className={styles.gridCardTonerLabel} style={{ color: tonerLevelColor(p.toner[0].percent) }}>
                     {p.toner[0].label}: {p.toner[0].percent}%
                   </p>
                 </div>
               )}
             </button>
           ))}
-          {pageItems.length === 0 && (
-            <p className="col-span-full py-12 text-center text-ink-faint">Nenhuma impressora encontrada com esses filtros.</p>
-          )}
+          {pageItems.length === 0 && <p className={styles.emptyState}>Nenhuma impressora encontrada com esses filtros.</p>}
         </div>
       )}
 
-      <div className="flex flex-col-reverse items-center justify-between gap-3 border-t border-border p-4 sm:flex-row">
-        <p className="text-[12px] text-ink-faint">
+      <div className={styles.pagination}>
+        <p className={styles.paginationInfo}>
           Mostrando {printers.length === 0 ? 0 : (currentPage - 1) * pageSize + 1} a{" "}
           {Math.min(currentPage * pageSize, printers.length)} de {printers.length} impressoras
         </p>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-            className="rounded-lg border border-border p-1.5 text-ink-soft hover:bg-surface-2 disabled:opacity-30"
-          >
+        <div className={styles.paginationControls}>
+          <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1} className={styles.pageArrow}>
             <ChevronLeft size={16} />
           </button>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
             <button
               key={n}
               onClick={() => setPage(n)}
-              className={`h-8 w-8 rounded-lg text-sm font-medium ${
-                n === currentPage ? "bg-brand text-white" : "text-ink-soft hover:bg-surface-2"
-              }`}
+              className={cn(styles.pageNumber, n === currentPage && styles.pageNumberActive)}
             >
               {n}
             </button>
@@ -334,7 +319,7 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="rounded-lg border border-border p-1.5 text-ink-soft hover:bg-surface-2 disabled:opacity-30"
+            className={styles.pageArrow}
           >
             <ChevronRight size={16} />
           </button>
@@ -344,7 +329,7 @@ export default function PrinterTable({ printers, totalCount, filters, onFilterCh
               setPageSize(Number(e.target.value));
               setPage(1);
             }}
-            className="rounded-lg border border-border bg-surface px-2.5 py-1.5 text-sm text-ink-soft focus:outline-none"
+            className={styles.pageSizeSelect}
           >
             {PAGE_SIZE_OPTIONS.map((n) => (
               <option key={n} value={n}>

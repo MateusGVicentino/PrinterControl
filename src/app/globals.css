@@ -1,13 +1,9 @@
-@import "tailwindcss";
-
-/* Modo escuro via classe .dark na <html> (lib/theme.tsx alterna),
-   em vez do prefers-color-scheme padrão do Tailwind v4. */
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --font-sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: "Source Serif 4", Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+/* Tokens de design — extraídos 1:1 do antigo index.css (Tailwind v4 @theme).
+   Modo escuro via classe .dark na <html> (lib/theme.tsx alterna). */
+:root {
+  --font-sans: var(--font-public-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --color-canvas: #f6f3ee;
   --color-surface: #ffffff;
@@ -85,6 +81,17 @@ html.dark {
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.35), 0 24px 48px -16px rgba(0, 0, 0, 0.6);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   background: var(--color-canvas);
@@ -93,6 +100,37 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variant-numeric: tabular-nums;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 
 * {
@@ -138,6 +176,18 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-view-in { animation: view-in 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin { animation: spin 1s linear infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }

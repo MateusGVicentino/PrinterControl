@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Dependências externas: react (useMemo/useState), lucide-react (ícones).
  * Dependências locais: PrinterStatusBadge, lib/tonerColor (cor por canal e
@@ -16,6 +18,8 @@ import type { Printer, TonerLevel } from "../types";
 import PrinterStatusBadge from "./PrinterStatusBadge";
 import { tonerChannelColor, tonerLevelColor } from "../lib/tonerColor";
 import { useTheme } from "../lib/theme";
+import { cn } from "../lib/cn";
+import styles from "./TonerMonitoring.module.css";
 
 type TonerClass = "critical" | "warning" | "normal" | "none";
 
@@ -45,24 +49,19 @@ interface SummaryCardProps {
 }
 
 const TONE = {
-  critical: "bg-critical-tint text-critical",
-  warning: "bg-warning-tint text-warning",
-  success: "bg-success-tint text-success",
-  faint: "bg-surface-2 text-ink-faint",
+  critical: styles.toneCritical,
+  warning: styles.toneWarning,
+  success: styles.toneSuccess,
+  faint: styles.toneFaint,
 };
 
 function SummaryCard({ label, value, icon, tone, active, onClick }: SummaryCardProps) {
   return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-3.5 rounded-2xl border bg-surface p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md ${
-        active ? "border-transparent ring-2 ring-brand/30" : "border-border"
-      }`}
-    >
-      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${TONE[tone]}`}>{icon}</div>
-      <div className="min-w-0">
-        <p className="text-2xl font-extrabold leading-none text-ink">{value}</p>
-        <p className="mt-1 truncate text-[12.5px] font-semibold text-ink-soft">{label}</p>
+    <button onClick={onClick} className={cn(styles.summaryCard, active && styles.summaryCardActive)}>
+      <div className={cn(styles.summaryIcon, TONE[tone])}>{icon}</div>
+      <div className={styles.summaryTextWrap}>
+        <p className={styles.summaryValue}>{value}</p>
+        <p className={styles.summaryLabel}>{label}</p>
       </div>
     </button>
   );
@@ -106,33 +105,29 @@ export default function TonerMonitoring({ printers, onOpenDetails, lastChecked, 
   }, [classified, filter, query]);
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3.5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+    <div className={styles.page}>
+      <div className={styles.headerCard}>
+        <div className={styles.headerLeft}>
+          <div className={styles.headerIcon}>
             <Droplet size={20} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-ink">Monitoramento de Toner</h2>
-            <p className="text-sm text-ink-faint">Nível de suprimento de toda a frota, atualizado em tempo real.</p>
+            <h2 className={styles.headerTitle}>Monitoramento de Toner</h2>
+            <p className={styles.headerSubtitle}>Nível de suprimento de toda a frota, atualizado em tempo real.</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 sm:flex-col sm:items-end sm:gap-1.5">
-          <p className="text-xs text-ink-faint">
-            Última verificação: <span className="font-semibold text-ink-soft">{lastChecked.toLocaleTimeString("pt-BR")}</span>
+        <div className={styles.headerRight}>
+          <p className={styles.lastChecked}>
+            Última verificação: <span className={styles.lastCheckedValue}>{lastChecked.toLocaleTimeString("pt-BR")}</span>
           </p>
-          <button
-            onClick={onRefresh}
-            disabled={refreshing}
-            className="flex items-center gap-2 rounded-xl border border-border bg-surface-2 px-3.5 py-2 text-sm font-semibold text-ink transition-colors hover:bg-surface-sunken disabled:opacity-60"
-          >
+          <button onClick={onRefresh} disabled={refreshing} className={styles.refreshButton}>
             <RefreshCw size={15} className={refreshing ? "animate-spin" : ""} />
             {refreshing ? "Verificando..." : "Atualizar agora"}
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className={styles.summaryGrid}>
         <SummaryCard
           label="Toner crítico (≤15%)"
           value={counts.critical}
@@ -167,89 +162,83 @@ export default function TonerMonitoring({ printers, onOpenDetails, lastChecked, 
         />
       </div>
 
-      <div className="min-w-0 overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-        <div className="flex flex-col gap-4 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-1.5">
+      <div className={styles.tableCard}>
+        <div className={styles.filterBar}>
+          <div className={styles.filterPills}>
             {FILTERS.map((f) => (
               <button
                 key={f.value}
                 onClick={() => setFilter(f.value)}
-                className={`rounded-full px-3 py-1.5 text-[12.5px] font-medium transition-colors ${
-                  filter === f.value ? "bg-brand text-white" : "bg-surface-2 text-ink-soft hover:bg-surface-sunken"
-                }`}
+                className={cn(styles.filterPill, filter === f.value ? styles.filterPillActive : styles.filterPillInactive)}
               >
                 {f.label}
                 {f.value !== "todos" && ` (${counts[f.value]})`}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-surface-2 px-3 py-2 text-ink-faint">
+          <div className={styles.searchBox}>
             <Search size={15} />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar por nome ou IP..."
-              className="w-44 bg-transparent text-ink placeholder:text-ink-faint focus:outline-none"
+              className={styles.searchInput}
             />
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse text-sm">
+        <div className={styles.tableScroll}>
+          <table className={styles.table}>
             <thead>
-              <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-                <th className="px-5 py-3">Impressora</th>
-                <th className="px-3 py-3">IP</th>
-                <th className="px-3 py-3">Status</th>
-                <th className="px-3 py-3">Níveis de toner</th>
-                <th className="px-3 py-3">Última atividade</th>
+              <tr className={styles.theadRow}>
+                <th className={styles.thFirst}>Impressora</th>
+                <th className={styles.th}>IP</th>
+                <th className={styles.th}>Status</th>
+                <th className={styles.th}>Níveis de toner</th>
+                <th className={styles.th}>Última atividade</th>
               </tr>
             </thead>
             <tbody>
               {rows.map(({ printer: p, cls }) => (
-                <tr
-                  key={p.id}
-                  onClick={() => onOpenDetails(p)}
-                  className="cursor-pointer border-t border-border transition-colors hover:bg-surface-2"
-                >
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-2.5">
-                      {cls === "critical" && <AlertTriangle size={14} className="shrink-0 text-critical" />}
+                <tr key={p.id} onClick={() => onOpenDetails(p)} className={styles.row}>
+                  <td className={styles.tdFirst}>
+                    <div className={styles.nameCell}>
+                      {cls === "critical" && <AlertTriangle size={14} className={styles.criticalIcon} />}
                       <div>
-                        <p className="font-semibold text-ink">{p.name}</p>
-                        <p className="text-[12px] text-ink-faint">{p.department}</p>
+                        <p className={styles.printerName}>{p.name}</p>
+                        <p className={styles.printerDept}>{p.department}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-3 py-3.5 text-ink-soft">{p.ip}</td>
-                  <td className="px-3 py-3.5">
+                  <td className={styles.tdSoft}>{p.ip}</td>
+                  <td className={styles.td}>
                     <PrinterStatusBadge status={p.status} />
                   </td>
-                  <td className="px-3 py-3.5">
+                  <td className={styles.td}>
                     {p.toner && p.toner.length > 0 ? (
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                      <div className={styles.tonerList}>
                         {p.toner.map((t) => (
-                          <div key={t.color} className="flex items-center gap-1.5" title={`${t.label}: ${t.percent}%`}>
-                            <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: tonerChannelColor(t.color, theme) }} />
-                            <div className="h-1.5 w-12 overflow-hidden rounded-full bg-surface-sunken">
-                              <div className="h-full rounded-full" style={{ width: `${t.percent}%`, backgroundColor: tonerChannelColor(t.color, theme) }} />
+                          <div key={t.color} className={styles.tonerItem} title={`${t.label}: ${t.percent}%`}>
+                            <span className={styles.tonerDot} style={{ backgroundColor: tonerChannelColor(t.color, theme) }} />
+                            <div className={styles.tonerBarTrack}>
+                              <div className={styles.tonerBarFill} style={{ width: `${t.percent}%`, backgroundColor: tonerChannelColor(t.color, theme) }} />
                             </div>
-                            <span className="text-[12.5px] font-semibold" style={{ color: tonerLevelColor(t.percent) }}>
+                            <span className={styles.tonerPercent} style={{ color: tonerLevelColor(t.percent) }}>
                               {t.percent}%
                             </span>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <span className="text-ink-faint">Sem leitura de toner</span>
+                      <span className={styles.noToner}>Sem leitura de toner</span>
                     )}
                   </td>
-                  <td className="px-3 py-3.5 text-ink-soft">{p.lastSeen}</td>
+                  <td className={styles.tdSoft}>{p.lastSeen}</td>
                 </tr>
               ))}
               {rows.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-5 py-12 text-center text-ink-faint">
+                  <td colSpan={5} className={styles.emptyCell}>
                     Nenhuma impressora encontrada com esses filtros.
                   </td>
                 </tr>
@@ -258,7 +247,7 @@ export default function TonerMonitoring({ printers, onOpenDetails, lastChecked, 
           </table>
         </div>
 
-        <div className="border-t border-border px-5 py-3 text-[12px] text-ink-faint">
+        <div className={styles.footer}>
           Mostrando {rows.length} de {printers.length} impressoras
         </div>
       </div>

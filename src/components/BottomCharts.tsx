@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Dependências externas: recharts (AreaChart/PieChart — os dois gráficos
  * deste arquivo) e lucide-react (ícones de tendência/seta). `monthlyUsage`
@@ -23,6 +25,8 @@ import { TrendingUp, TrendingDown, ChevronRight } from "lucide-react";
 import type { MonthlyUsageEntry } from "../types";
 import { useTheme } from "../lib/theme";
 import { getChartColors } from "../lib/chartColors";
+import { cn } from "../lib/cn";
+import styles from "./BottomCharts.module.css";
 
 function PagesConsumedCard({ monthlyUsage }: { monthlyUsage: MonthlyUsageEntry[] }) {
   const { theme } = useTheme();
@@ -30,24 +34,24 @@ function PagesConsumedCard({ monthlyUsage }: { monthlyUsage: MonthlyUsageEntry[]
   const last = monthlyUsage[monthlyUsage.length - 1];
   if (!last) {
     return (
-      <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-        <h3 className="text-[15px] font-bold text-ink">Consumo de páginas (mês)</h3>
-        <p className="mt-4 text-sm text-ink-faint">
+      <div className={styles.card}>
+        <h3 className={styles.title}>Consumo de páginas (mês)</h3>
+        <p className={styles.emptyText}>
           Ainda sem histórico mensal. Rode scripts/Relatorio-Mensal.ps1 por dois meses seguidos para o primeiro ponto aparecer aqui.
         </p>
       </div>
     );
   }
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="text-[15px] font-bold text-ink">Consumo de páginas (mês)</h3>
-        <span className="rounded-full bg-brand-tint px-2.5 py-1 text-xs font-semibold text-brand-700">
+    <div className={styles.card}>
+      <div className={styles.headerRow}>
+        <h3 className={styles.title}>Consumo de páginas (mês)</h3>
+        <span className={styles.periodBadge}>
           {last.month}: {last.pages.toLocaleString("pt-BR")}
         </span>
       </div>
-      <p className="mt-0.5 text-xs text-ink-faint">Período: {last.period}</p>
-      <div className="mt-3 h-48">
+      <p className={styles.periodText}>Período: {last.period}</p>
+      <div className={styles.chartWrap}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={monthlyUsage} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
             <defs>
@@ -101,22 +105,20 @@ function TotalPrintsCard({ monthlyUsage }: { monthlyUsage: MonthlyUsageEntry[] }
   const maxPages = Math.max(1, ...monthlyUsage.map((m) => m.pages));
 
   return (
-    <div className="flex flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm">
-      <h3 className="text-[15px] font-bold text-ink">Impressões totais</h3>
-      <p className="mt-3 text-[2.25rem] font-extrabold leading-none tracking-tight text-ink">
-        {total.toLocaleString("pt-BR")}
-      </p>
-      <div className={`mt-2 flex items-center gap-1.5 text-sm font-semibold ${isUp ? "text-success" : "text-critical"}`}>
+    <div className={cn(styles.card, styles.cardFlexCol)}>
+      <h3 className={styles.title}>Impressões totais</h3>
+      <p className={styles.totalValue}>{total.toLocaleString("pt-BR")}</p>
+      <div className={cn(styles.growthRow, isUp ? styles.growthUp : styles.growthDown)}>
         {isUp ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
         {isUp ? "+" : ""}
         {growth.toFixed(1)}%
-        <span className="font-normal text-ink-faint">vs mês anterior</span>
+        <span className={styles.growthLabel}>vs mês anterior</span>
       </div>
-      <div className="mt-auto flex items-end gap-2 pt-6" title="Páginas por mês (Jan–Jun)">
+      <div className={styles.barsRow} title="Páginas por mês (Jan–Jun)">
         {monthlyUsage.map((m) => (
           <div
             key={m.month}
-            className="flex-1 rounded-t-lg bg-brand/80"
+            className={styles.bar}
             style={{ height: `${8 + (m.pages / maxPages) * 82}px` }}
             title={`${m.month}: ${m.pages.toLocaleString("pt-BR")}`}
           />
@@ -143,10 +145,10 @@ function AlertsDonutCard({ attention, total, onViewAll }: AlertsDonutCardProps) 
   ];
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-      <h3 className="text-[15px] font-bold text-ink">Dispositivos com alerta</h3>
-      <div className="mt-2 flex items-center gap-4">
-        <div className="relative h-32 w-32 shrink-0">
+    <div className={styles.card}>
+      <h3 className={styles.title}>Dispositivos com alerta</h3>
+      <div className={styles.donutRow}>
+        <div className={styles.donutWrap}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie data={donutData} dataKey="value" innerRadius={38} outerRadius={56} startAngle={90} endAngle={450} stroke="none">
@@ -156,14 +158,14 @@ function AlertsDonutCard({ attention, total, onViewAll }: AlertsDonutCardProps) 
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <span className="text-2xl font-extrabold text-warning">{attention}</span>
+          <div className={styles.donutCenter}>
+            <span className={styles.attentionValue}>{attention}</span>
           </div>
         </div>
         <div>
-          <p className="text-2xl font-extrabold text-warning">{attention} Atenção</p>
-          <p className="text-sm text-ink-faint">{pct}% do total</p>
-          <button onClick={onViewAll} className="mt-3 flex items-center gap-1 text-sm font-semibold text-brand-700 hover:text-brand-600">
+          <p className={styles.attentionValue}>{attention} Atenção</p>
+          <p className={styles.attentionPct}>{pct}% do total</p>
+          <button onClick={onViewAll} className={styles.viewAllButton}>
             Ver todos
             <ChevronRight size={15} />
           </button>
@@ -182,7 +184,7 @@ interface BottomChartsProps {
 
 export default function BottomCharts({ attention, total, monthlyUsage, onViewAlerts }: BottomChartsProps) {
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+    <div className={styles.grid}>
       <PagesConsumedCard monthlyUsage={monthlyUsage} />
       <TotalPrintsCard monthlyUsage={monthlyUsage} />
       <AlertsDonutCard attention={attention} total={total} onViewAll={onViewAlerts} />

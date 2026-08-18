@@ -6,6 +6,8 @@
  * ou quem talvez nem devesse estar mais em operação.
  */
 import { ArrowDownWideNarrow, ArrowUpWideNarrow } from "lucide-react";
+import { cn } from "../lib/cn";
+import styles from "./PrinterRanking.module.css";
 import type { Printer } from "../types";
 
 interface RankedPrinter {
@@ -29,36 +31,36 @@ function RankList({ title, icon, items, tone, onOpenDetails }: {
 }) {
   const max = Math.max(1, ...items.map((i) => i.total));
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
-      <div className="flex items-center gap-2.5">
-        <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${tone === "brand" ? "bg-brand-tint text-brand-700" : "bg-surface-2 text-ink-faint"}`}>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={cn(styles.iconWrap, tone === "brand" ? styles.iconWrapBrand : styles.iconWrapFaint)}>
           {icon}
         </div>
-        <h3 className="text-[15px] font-bold text-ink">{title}</h3>
+        <h3 className={styles.title}>{title}</h3>
       </div>
-      <div className="mt-4 flex flex-col gap-3">
+      <div className={styles.list}>
         {items.map(({ printer, total }, i) => (
           <button
             key={printer.id}
             onClick={() => onOpenDetails(printer)}
-            className="flex items-center gap-3 rounded-xl px-2 py-1.5 text-left transition-colors hover:bg-surface-2"
+            className={styles.item}
           >
-            <span className="w-4 shrink-0 text-[12px] font-bold text-ink-faint">{i + 1}</span>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-2">
-                <p className="truncate text-[13.5px] font-semibold text-ink">{printer.name}</p>
-                <span className="shrink-0 text-[13px] font-bold text-ink">{total.toLocaleString("pt-BR")}</span>
+            <span className={styles.rank}>{i + 1}</span>
+            <div className={styles.info}>
+              <div className={styles.infoTop}>
+                <p className={styles.name}>{printer.name}</p>
+                <span className={styles.total}>{total.toLocaleString("pt-BR")}</span>
               </div>
-              <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-surface-sunken">
+              <div className={styles.barTrack}>
                 <div
-                  className={`h-full rounded-full ${tone === "brand" ? "bg-brand" : "bg-ink-faint"}`}
+                  className={cn(styles.barFill, tone === "brand" ? styles.barFillBrand : styles.barFillFaint)}
                   style={{ width: `${(total / max) * 100}%` }}
                 />
               </div>
             </div>
           </button>
         ))}
-        {items.length === 0 && <p className="py-4 text-center text-sm text-ink-faint">Sem dados suficientes.</p>}
+        {items.length === 0 && <p className={styles.empty}>Sem dados suficientes.</p>}
       </div>
     </div>
   );
@@ -77,7 +79,7 @@ export default function PrinterRanking({ printers, onOpenDetails }: PrinterRanki
   if (ranked.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+    <div className={styles.grid}>
       <RankList
         title="Impressoras que mais imprimem"
         icon={<ArrowUpWideNarrow size={17} />}

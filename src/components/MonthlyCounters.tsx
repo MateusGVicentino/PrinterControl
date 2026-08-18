@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Sem libs externas. Um card por mês (Jan..Jun hoje) com o total de páginas
  * daquele ciclo — a mesma soma que já alimenta o gráfico "Consumo de
@@ -7,6 +9,8 @@
  */
 import { TrendingUp, TrendingDown, Minus, CalendarRange } from "lucide-react";
 import type { MonthlyUsageEntry } from "../types";
+import { cn } from "../lib/cn";
+import styles from "./MonthlyCounters.module.css";
 
 interface MonthlyCountersProps {
   data: MonthlyUsageEntry[];
@@ -16,33 +20,31 @@ export default function MonthlyCounters({ data }: MonthlyCountersProps) {
   if (data.length === 0) return null;
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-      <div className="flex items-center gap-2.5">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.headerIconWrap}>
           <CalendarRange size={17} />
         </div>
         <div>
-          <h2 className="text-lg font-bold text-ink">Contadores Mensais</h2>
-          <p className="text-sm text-ink-faint">Total de páginas impressas em cada ciclo de leitura.</p>
+          <h2 className={styles.title}>Contadores Mensais</h2>
+          <p className={styles.subtitle}>Total de páginas impressas em cada ciclo de leitura.</p>
         </div>
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <div className={styles.grid}>
         {data.map((m, i) => {
           const prev = data[i - 1];
           const delta = prev && prev.pages > 0 ? ((m.pages - prev.pages) / prev.pages) * 100 : null;
           const Icon = delta === null ? Minus : delta >= 0 ? TrendingUp : TrendingDown;
-          const deltaColor = delta === null ? "text-ink-faint" : delta >= 0 ? "text-success" : "text-critical";
+          const deltaColor = delta === null ? styles.deltaFaint : delta >= 0 ? styles.deltaSuccess : styles.deltaCritical;
           return (
-            <div key={m.month} className="rounded-xl border border-border bg-canvas p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wide text-ink-faint">{m.month}</p>
-              <p className="mt-1.5 text-xl font-extrabold leading-none tracking-tight text-ink">
-                {m.pages.toLocaleString("pt-BR")}
-              </p>
-              <div className={`mt-2 flex items-center gap-1 text-[11px] font-semibold ${deltaColor}`}>
+            <div key={m.month} className={styles.monthCard}>
+              <p className={styles.monthLabel}>{m.month}</p>
+              <p className={styles.monthValue}>{m.pages.toLocaleString("pt-BR")}</p>
+              <div className={cn(styles.delta, deltaColor)}>
                 <Icon size={12} />
                 {delta === null ? "referência" : `${delta >= 0 ? "+" : ""}${delta.toFixed(1)}%`}
               </div>
-              <p className="mt-1 truncate text-[10.5px] text-ink-faint" title={m.period}>
+              <p className={styles.monthPeriod} title={m.period}>
                 {m.period}
               </p>
             </div>

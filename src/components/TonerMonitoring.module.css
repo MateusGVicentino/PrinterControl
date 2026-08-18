@@ -1,0 +1,389 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.headerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 640px) {
+  .headerCard {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.headerIcon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--color-brand-tint);
+  color: var(--color-brand-700);
+}
+
+.headerTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.headerSubtitle {
+  font-size: 0.875rem;
+  color: var(--color-ink-faint);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .headerRight {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.375rem;
+  }
+}
+
+.lastChecked {
+  font-size: 0.75rem;
+  color: var(--color-ink-faint);
+}
+
+.lastCheckedValue {
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.refreshButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  transition: background-color 0.15s;
+}
+
+.refreshButton:hover {
+  background: var(--color-surface-sunken);
+}
+
+.refreshButton:disabled {
+  opacity: 0.6;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .summaryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.summaryCard {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1rem;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.summaryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.summaryCardActive {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand) 30%, transparent);
+}
+
+.summaryIcon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+.toneCritical {
+  background: var(--color-critical-tint);
+  color: var(--color-critical);
+}
+
+.toneWarning {
+  background: var(--color-warning-tint);
+  color: var(--color-warning);
+}
+
+.toneSuccess {
+  background: var(--color-success-tint);
+  color: var(--color-success);
+}
+
+.toneFaint {
+  background: var(--color-surface-2);
+  color: var(--color-ink-faint);
+}
+
+.summaryTextWrap {
+  min-width: 0;
+}
+
+.summaryValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.summaryLabel {
+  margin-top: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.tableCard {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .filterBar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.filterPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.filterPill {
+  border-radius: 999px;
+  padding: 0.375rem 0.75rem;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.filterPillActive {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.filterPillInactive {
+  background: var(--color-surface-2);
+  color: var(--color-ink-soft);
+}
+
+.filterPillInactive:hover {
+  background: var(--color-surface-sunken);
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  padding: 0.5rem 0.75rem;
+  color: var(--color-ink-faint);
+}
+
+.searchInput {
+  width: 11rem;
+  background: transparent;
+  color: var(--color-ink);
+  border: none;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-ink-faint);
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.theadRow {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-faint);
+}
+
+.thFirst {
+  padding: 0.75rem 1.25rem;
+}
+
+.th {
+  padding: 0.75rem 0.75rem;
+}
+
+.row {
+  cursor: pointer;
+  border-top: 1px solid var(--color-border);
+  transition: background-color 0.15s;
+}
+
+.row:hover {
+  background: var(--color-surface-2);
+}
+
+.tdFirst {
+  padding: 0.875rem 1.25rem;
+}
+
+.td {
+  padding: 0.875rem 0.75rem;
+}
+
+.tdSoft {
+  padding: 0.875rem 0.75rem;
+  color: var(--color-ink-soft);
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.criticalIcon {
+  flex-shrink: 0;
+  color: var(--color-critical);
+}
+
+.printerName {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.printerDept {
+  font-size: 12px;
+  color: var(--color-ink-faint);
+}
+
+.tonerList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+  row-gap: 0.375rem;
+}
+
+.tonerItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.tonerDot {
+  height: 0.5rem;
+  width: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+}
+
+.tonerBarTrack {
+  height: 0.375rem;
+  width: 3rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-sunken);
+}
+
+.tonerBarFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.tonerPercent {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.noToner {
+  color: var(--color-ink-faint);
+}
+
+.emptyCell {
+  padding: 3rem 1.25rem;
+  text-align: center;
+  color: var(--color-ink-faint);
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: 0.75rem 1.25rem;
+  font-size: 12px;
+  color: var(--color-ink-faint);
+}

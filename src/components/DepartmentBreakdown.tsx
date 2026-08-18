@@ -7,6 +7,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Building2 } from "lucide-react";
 import type { DepartmentUsage } from "../data/printers";
+import styles from "./DepartmentBreakdown.module.css";
 
 const MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
 
@@ -21,54 +22,54 @@ export default function DepartmentBreakdown({ data }: DepartmentBreakdownProps) 
   const maxTotal = Math.max(...sorted.map((d) => d.total));
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-      <div className="flex items-center gap-2.5">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.iconWrap}>
           <Building2 size={17} />
         </div>
         <div>
-          <h2 className="text-lg font-bold text-ink">Consumo por Departamento</h2>
-          <p className="text-sm text-ink-faint">Total de páginas por área, Janeiro a Junho — todas as unidades.</p>
+          <h2 className={styles.title}>Consumo por Departamento</h2>
+          <p className={styles.subtitle}>Total de páginas por área, Janeiro a Junho — todas as unidades.</p>
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-3">
+      <div className={styles.list}>
         {sorted.map((d) => {
           const pct = grandTotal > 0 ? Math.round((d.total / grandTotal) * 100) : 0;
           const isOpen = expanded === d.department;
           const maxMonth = Math.max(...d.monthly);
           return (
-            <div key={d.department} className="rounded-xl border border-border bg-canvas p-4">
+            <div key={d.department} className={styles.row}>
               <button
                 onClick={() => setExpanded(isOpen ? null : d.department)}
-                className="flex w-full items-center gap-4 text-left"
+                className={styles.rowButton}
               >
-                <div className="w-48 shrink-0 truncate text-sm font-semibold text-ink" title={d.department}>
+                <div className={styles.deptName} title={d.department}>
                   {d.department}
                 </div>
-                <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-surface-sunken">
+                <div className={styles.barTrack}>
                   <div
-                    className="h-full rounded-full bg-brand"
+                    className={styles.barFill}
                     style={{ width: `${(d.total / maxTotal) * 100}%` }}
                   />
                 </div>
-                <div className="w-24 shrink-0 text-right text-sm font-bold text-ink">
+                <div className={styles.total}>
                   {d.total.toLocaleString("pt-BR")}
                 </div>
-                <div className="w-10 shrink-0 text-right text-xs text-ink-faint">{pct}%</div>
-                {isOpen ? <ChevronUp size={16} className="shrink-0 text-ink-faint" /> : <ChevronDown size={16} className="shrink-0 text-ink-faint" />}
+                <div className={styles.pct}>{pct}%</div>
+                {isOpen ? <ChevronUp size={16} className={styles.chevron} /> : <ChevronDown size={16} className={styles.chevron} />}
               </button>
 
               {isOpen && (
-                <div className="mt-4 flex items-end gap-2 border-t border-border pt-4">
+                <div className={styles.monthly}>
                   {d.monthly.map((pages, i) => (
-                    <div key={MONTHS[i]} className="flex flex-1 flex-col items-center gap-1.5">
-                      <span className="text-[11px] font-semibold text-ink-soft">{pages.toLocaleString("pt-BR")}</span>
+                    <div key={MONTHS[i]} className={styles.monthCol}>
+                      <span className={styles.monthValue}>{pages.toLocaleString("pt-BR")}</span>
                       <div
-                        className="w-full rounded-t-md bg-brand/70"
+                        className={styles.monthBar}
                         style={{ height: `${8 + (pages / maxMonth) * 56}px` }}
                       />
-                      <span className="text-[11px] text-ink-faint">{MONTHS[i]}</span>
+                      <span className={styles.monthLabel}>{MONTHS[i]}</span>
                     </div>
                   ))}
                 </div>

@@ -5,6 +5,7 @@
  */
 import { ArchiveRestore } from "lucide-react";
 import type { DecommissionedPrinter } from "../data/printers";
+import styles from "./DecommissionedList.module.css";
 
 interface DecommissionedListProps {
   data: DecommissionedPrinter[];
@@ -12,36 +13,36 @@ interface DecommissionedListProps {
 
 export default function DecommissionedList({ data }: DecommissionedListProps) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-      <div className="flex items-center gap-2.5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-2 text-ink-faint">
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.iconWrap}>
           <ArchiveRestore size={17} />
         </div>
         <div>
-          <h2 className="text-lg font-bold text-ink">Impressoras Devolvidas / Fora de Operação</h2>
-          <p className="text-sm text-ink-faint">{data.length} equipamentos — estoque, backup ou retirados do parque ativo.</p>
+          <h2 className={styles.title}>Impressoras Devolvidas / Fora de Operação</h2>
+          <p className={styles.subtitle}>{data.length} equipamentos — estoque, backup ou retirados do parque ativo.</p>
         </div>
       </div>
 
-      <div className="mt-5 overflow-x-auto rounded-xl border border-border">
-        <table className="w-full min-w-[560px] border-collapse text-sm">
+      <div className={styles.tableWrap}>
+        <table className={styles.table}>
           <thead>
-            <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-              <th className="bg-surface-2 px-4 py-2.5">Modelo</th>
-              <th className="bg-surface-2 px-4 py-2.5">Departamento / Origem</th>
-              <th className="bg-surface-2 px-4 py-2.5">Serial</th>
-              <th className="bg-surface-2 px-4 py-2.5">IP / Situação</th>
-              <th className="bg-surface-2 px-4 py-2.5">Data</th>
+            <tr>
+              <th className={styles.th}>Modelo</th>
+              <th className={styles.th}>Departamento / Origem</th>
+              <th className={styles.th}>Serial</th>
+              <th className={styles.th}>IP / Situação</th>
+              <th className={styles.th}>Data</th>
             </tr>
           </thead>
           <tbody>
             {data.map((p, i) => (
-              <tr key={`${p.serial}-${i}`} className="border-t border-border">
-                <td className="px-4 py-2.5 font-medium text-ink">{p.model}</td>
-                <td className="px-4 py-2.5 text-ink-soft">{p.department}</td>
-                <td className="px-4 py-2.5 text-ink-faint">{p.serial}</td>
-                <td className="px-4 py-2.5 text-ink-soft">{p.ip}</td>
-                <td className="px-4 py-2.5 text-ink-faint">{p.date ?? "—"}</td>
+              <tr key={`${p.serial}-${i}`} className={styles.tr}>
+                <td className={`${styles.td} ${styles.tdModel}`}>{p.model}</td>
+                <td className={`${styles.td} ${styles.tdSoft}`}>{p.department}</td>
+                <td className={`${styles.td} ${styles.tdFaint}`}>{p.serial}</td>
+                <td className={`${styles.td} ${styles.tdSoft}`}>{p.ip}</td>
+                <td className={`${styles.td} ${styles.tdFaint}`}>{p.date ?? "—"}</td>
               </tr>
             ))}
           </tbody>

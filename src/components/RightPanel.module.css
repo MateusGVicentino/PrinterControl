@@ -1,0 +1,198 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.tonerList {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tonerRowHeader {
+  margin-bottom: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.tonerLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-ink-soft);
+}
+
+.tonerDot {
+  height: 0.625rem;
+  width: 0.625rem;
+  border-radius: 999px;
+}
+
+.tonerPercentValue {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.tonerBarWrap {
+  height: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-sunken);
+}
+
+.tonerBarFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.detailsLink {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.detailsLink:hover {
+  color: var(--color-brand-600);
+}
+
+.criticalCard {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-critical) 25%, transparent);
+  background: var(--color-surface);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.criticalHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.criticalIconWrap {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--color-critical-tint);
+  color: var(--color-critical);
+}
+
+.criticalLabel {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-critical);
+}
+
+.criticalValue {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-ink);
+}
+
+.criticalDesc {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-soft);
+}
+
+.criticalButton {
+  margin-top: 1rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  background: var(--color-critical);
+  padding: 0.625rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.15s;
+}
+
+.criticalButton:hover {
+  background: color-mix(in srgb, var(--color-critical) 90%, transparent);
+}
+
+.quickActionsTitle {
+  margin-bottom: 0.5rem;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.quickActionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.quickAction {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  transition: background-color 0.15s;
+}
+
+.quickAction:hover {
+  background: var(--color-surface-2);
+}
+
+.quickActionIcon {
+  color: var(--color-ink-faint);
+}
+
+.quickActionLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.quickActionBadge {
+  display: flex;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-critical);
+  padding: 0 0.25rem;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quickActionChevron {
+  color: var(--color-ink-faint);
+}

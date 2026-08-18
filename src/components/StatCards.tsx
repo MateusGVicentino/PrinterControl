@@ -1,6 +1,10 @@
+"use client";
+
 // Dependência externa: só lucide-react (ícones). Cards clicáveis — clicar
 // aplica o filtro de status correspondente (mesmo estado do Sidebar).
 import { Printer, Wifi, WifiOff, TriangleAlert } from "lucide-react";
+import { cn } from "../lib/cn";
+import styles from "./StatCards.module.css";
 
 interface StatCardProps {
   label: string;
@@ -12,28 +16,23 @@ interface StatCardProps {
   onClick?: () => void;
 }
 
-const TONE = {
-  brand: { icon: "bg-brand-tint text-brand-700", ring: "ring-brand/30" },
-  success: { icon: "bg-success-tint text-success", ring: "ring-success/30" },
-  critical: { icon: "bg-critical-tint text-critical", ring: "ring-critical/30" },
-  warning: { icon: "bg-warning-tint text-warning", ring: "ring-warning/30" },
+const TONE: Record<StatCardProps["tone"], { icon: string; active: string }> = {
+  brand: { icon: styles.iconBrand, active: styles.activeBrand },
+  success: { icon: styles.iconSuccess, active: styles.activeSuccess },
+  critical: { icon: styles.iconCritical, active: styles.activeCritical },
+  warning: { icon: styles.iconWarning, active: styles.activeWarning },
 };
 
 function StatCard({ label, value, sublabel, icon, tone, active, onClick }: StatCardProps) {
   const t = TONE[tone];
   return (
-    <button
-      onClick={onClick}
-      className={`group flex flex-col items-start rounded-2xl border bg-surface p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md ${
-        active ? `border-transparent ring-2 ${t.ring}` : "border-border"
-      }`}
-    >
-      <div className="flex w-full items-start justify-between">
-        <p className="text-[13px] font-semibold text-ink-soft">{label}</p>
-        <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${t.icon}`}>{icon}</div>
+    <button onClick={onClick} className={cn(styles.card, active ? t.active : styles.cardInactive)}>
+      <div className={styles.cardHeader}>
+        <p className={styles.label}>{label}</p>
+        <div className={cn(styles.iconWrap, t.icon)}>{icon}</div>
       </div>
-      <p className="mt-3 text-[2.25rem] font-extrabold leading-none tracking-tight text-ink">{value}</p>
-      <p className="mt-1.5 text-[13px] text-ink-faint">{sublabel}</p>
+      <p className={styles.value}>{value}</p>
+      <p className={styles.sublabel}>{sublabel}</p>
     </button>
   );
 }
@@ -49,7 +48,7 @@ interface StatCardsProps {
 
 export default function StatCards({ total, online, offline, attention, activeStatus, onSelectStatus }: StatCardsProps) {
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <div className={styles.grid}>
       <StatCard
         label="Total"
         value={total}

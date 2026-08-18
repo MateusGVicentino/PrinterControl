@@ -1,11 +1,15 @@
 /**
  * Dependências externas: react (Context API, para não precisar passar
  * `push()` por props em toda a árvore) e lucide-react (ícones do toast).
- * `ToastProvider` deve envolver o app (ver main.tsx); `useToast()` dá acesso
- * ao `push()` em qualquer componente filho.
+ * `ToastProvider` deve envolver o app (ver app/providers.tsx); `useToast()`
+ * dá acesso ao `push()` em qualquer componente filho.
  */
+"use client";
+
 import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from "react";
 import { CheckCircle2, Info, TriangleAlert, X } from "lucide-react";
+import styles from "./toast.module.css";
+import { cn } from "./cn";
 
 type ToastVariant = "success" | "info" | "warning";
 
@@ -29,9 +33,9 @@ const VARIANT_ICON: Record<ToastVariant, typeof CheckCircle2> = {
 };
 
 const VARIANT_COLOR: Record<ToastVariant, string> = {
-  success: "text-success",
-  info: "text-info",
-  warning: "text-warning",
+  success: styles.iconSuccess,
+  info: styles.iconInfo,
+  warning: styles.iconWarning,
 };
 
 export function ToastProvider({ children }: { children: ReactNode }) {
@@ -53,24 +57,17 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ push }}>
       {children}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[100] flex flex-col items-center gap-2 p-4 sm:items-end sm:right-4 sm:left-auto">
+      <div className={cn(styles.container)}>
         {toasts.map((t) => {
           const Icon = VARIANT_ICON[t.variant];
           return (
-            <div
-              key={t.id}
-              className="animate-toast-in pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-2xl border border-border bg-surface p-4 shadow-lg"
-            >
-              <Icon size={19} className={`mt-0.5 shrink-0 ${VARIANT_COLOR[t.variant]}`} />
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-ink">{t.title}</p>
-                {t.description && <p className="mt-0.5 text-[13px] leading-snug text-ink-soft">{t.description}</p>}
+            <div key={t.id} className={cn(styles.toast, "animate-toast-in")}>
+              <Icon size={19} className={cn(styles.icon, VARIANT_COLOR[t.variant])} />
+              <div className={styles.body}>
+                <p className={styles.title}>{t.title}</p>
+                {t.description && <p className={styles.description}>{t.description}</p>}
               </div>
-              <button
-                onClick={() => dismiss(t.id)}
-                className="shrink-0 rounded-lg p-1 text-ink-faint hover:bg-surface-2 hover:text-ink"
-                aria-label="Fechar notificação"
-              >
+              <button onClick={() => dismiss(t.id)} className={styles.close} aria-label="Fechar notificação">
                 <X size={15} />
               </button>
             </div>

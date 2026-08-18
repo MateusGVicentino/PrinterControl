@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Sem libs externas. Recria a estrutura original da planilha (uma tabela
  * IP/Modelo/Departamento + coluna por mês, agrupada por unidade) dentro do
@@ -8,6 +10,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronRight, Maximize2, Minimize2, History as HistoryIcon } from "lucide-react";
 import type { Printer } from "../types";
 import { getPrinterSite, getDepartmentLabel } from "../lib/site";
+import styles from "./HistoryMatrix.module.css";
 
 interface HistoryMatrixProps {
   printers: Printer[];
@@ -48,64 +51,58 @@ export default function HistoryMatrix({ printers }: HistoryMatrixProps) {
 
   if (months.length === 0) {
     return (
-      <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-ink">Histórico</h2>
-        <p className="mt-2 text-sm text-ink-faint">Ainda sem contadores mensais para exibir.</p>
+      <div className={styles.emptyCard}>
+        <h2 className={styles.emptyTitle}>Histórico</h2>
+        <p className={styles.emptyText}>Ainda sem contadores mensais para exibir.</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+    <div className={styles.root}>
+      <div className={styles.summaryCard}>
+        <div className={styles.summaryHeader}>
+          <div className={styles.summaryLeft}>
+            <div className={styles.iconBox}>
               <HistoryIcon size={17} />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-ink">Histórico de Impressões</h2>
-              <p className="text-sm text-ink-faint">
+              <h2 className={styles.summaryTitle}>Histórico de Impressões</h2>
+              <p className={styles.summarySubtitle}>
                 {withHistory.length} impressoras · {sites.length} unidades · {months[0]}–{months[months.length - 1]}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={expandAll}
-              className="flex items-center gap-1.5 rounded-xl border border-border bg-surface-2 px-3 py-2 text-xs font-semibold text-ink-soft hover:bg-surface-sunken"
-            >
+          <div className={styles.actionsRow}>
+            <button onClick={expandAll} className={styles.actionButton}>
               <Maximize2 size={13} />
               Expandir tudo
             </button>
-            <button
-              onClick={collapseAll}
-              className="flex items-center gap-1.5 rounded-xl border border-border bg-surface-2 px-3 py-2 text-xs font-semibold text-ink-soft hover:bg-surface-sunken"
-            >
+            <button onClick={collapseAll} className={styles.actionButton}>
               <Minimize2 size={13} />
               Recolher tudo
             </button>
           </div>
         </div>
 
-        <div className="mt-5 overflow-x-auto rounded-xl border border-border">
-          <table className="w-full min-w-[520px] border-collapse text-sm">
+        <div className={styles.tableWrap}>
+          <table className={styles.summaryTable}>
             <thead>
-              <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-                <th className="bg-surface-2 px-4 py-2.5">Total geral</th>
+              <tr className={styles.theadRow}>
+                <th className={styles.th}>Total geral</th>
                 {months.map((m) => (
-                  <th key={m} className="bg-surface-2 px-4 py-2.5 text-right">{m}</th>
+                  <th key={m} className={styles.thRight}>{m}</th>
                 ))}
-                <th className="bg-brand-tint px-4 py-2.5 text-right text-brand-700">Total</th>
+                <th className={styles.thTotal}>Total</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-t border-border font-bold text-ink">
-                <td className="px-4 py-2.5">Todas as unidades</td>
+              <tr className={styles.summaryBodyRow}>
+                <td className={styles.td}>Todas as unidades</td>
                 {grandTotals.map((t, i) => (
-                  <td key={i} className="px-4 py-2.5 text-right font-mono tabular-nums">{t.toLocaleString("pt-BR")}</td>
+                  <td key={i} className={styles.tdRightMono}>{t.toLocaleString("pt-BR")}</td>
                 ))}
-                <td className="bg-brand-tint px-4 py-2.5 text-right font-mono tabular-nums text-brand-700">
+                <td className={styles.tdTotalMono}>
                   {grandTotal.toLocaleString("pt-BR")}
                 </td>
               </tr>
@@ -121,62 +118,59 @@ export default function HistoryMatrix({ printers }: HistoryMatrixProps) {
         const siteTotal = siteMonthTotals.reduce((a, b) => a + b, 0);
 
         return (
-          <div key={site} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-            <button
-              onClick={() => toggleSite(site)}
-              className="flex w-full items-center justify-between gap-3 p-5 text-left hover:bg-surface-2"
-            >
-              <div className="flex items-center gap-2.5">
-                {isOpen ? <ChevronDown size={16} className="text-ink-faint" /> : <ChevronRight size={16} className="text-ink-faint" />}
-                <h3 className="text-[15px] font-bold text-ink">{site}</h3>
-                <span className="rounded-full bg-surface-2 px-2 py-0.5 text-xs font-semibold text-ink-faint">
+          <div key={site} className={styles.siteCard}>
+            <button onClick={() => toggleSite(site)} className={styles.siteToggle}>
+              <div className={styles.siteToggleLeft}>
+                {isOpen ? <ChevronDown size={16} className={styles.chevronIcon} /> : <ChevronRight size={16} className={styles.chevronIcon} />}
+                <h3 className={styles.siteTitle}>{site}</h3>
+                <span className={styles.countBadge}>
                   {sitePrinters.length} impressora{sitePrinters.length !== 1 ? "s" : ""}
                 </span>
               </div>
-              <span className="text-sm font-bold text-ink">{siteTotal.toLocaleString("pt-BR")} páginas</span>
+              <span className={styles.siteTotalLabel}>{siteTotal.toLocaleString("pt-BR")} páginas</span>
             </button>
 
             {isOpen && (
-              <div className="overflow-x-auto border-t border-border">
-                <table className="w-full min-w-[760px] border-collapse text-sm">
+              <div className={styles.siteTableWrap}>
+                <table className={styles.siteTable}>
                   <thead>
-                    <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-ink-faint">
-                      <th className="bg-surface-2 px-4 py-2.5">Nome</th>
-                      <th className="bg-surface-2 px-4 py-2.5">IP</th>
-                      <th className="bg-surface-2 px-4 py-2.5">Departamento</th>
+                    <tr className={styles.theadRow}>
+                      <th className={styles.th}>Nome</th>
+                      <th className={styles.th}>IP</th>
+                      <th className={styles.th}>Departamento</th>
                       {months.map((m) => (
-                        <th key={m} className="bg-surface-2 px-3 py-2.5 text-right">{m}</th>
+                        <th key={m} className={styles.thSiteMonth}>{m}</th>
                       ))}
-                      <th className="bg-surface-2 px-4 py-2.5 text-right">Total</th>
+                      <th className={styles.thSiteTotal}>Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     {sitePrinters.map((p) => {
                       const total = p.monthlyPages!.reduce((sum, m) => sum + m.pages, 0);
                       return (
-                        <tr key={p.id} className="border-t border-border hover:bg-surface-2">
-                          <td className="px-4 py-2.5 font-semibold text-ink">{p.name}</td>
-                          <td className="px-4 py-2.5 text-ink-faint">{p.ip}</td>
-                          <td className="max-w-[160px] truncate px-4 py-2.5 text-ink-soft" title={getDepartmentLabel(p)}>
+                        <tr key={p.id} className={styles.bodyRow}>
+                          <td className={styles.nameCell}>{p.name}</td>
+                          <td className={styles.ipCell}>{p.ip}</td>
+                          <td className={styles.deptCell} title={getDepartmentLabel(p)}>
                             {getDepartmentLabel(p)}
                           </td>
                           {p.monthlyPages!.map((m) => (
-                            <td key={m.month} className="px-3 py-2.5 text-right font-mono tabular-nums text-ink-soft">
+                            <td key={m.month} className={styles.monthCell}>
                               {m.pages.toLocaleString("pt-BR")}
                             </td>
                           ))}
-                          <td className="px-4 py-2.5 text-right font-mono font-bold tabular-nums text-ink">
+                          <td className={styles.totalCell}>
                             {total.toLocaleString("pt-BR")}
                           </td>
                         </tr>
                       );
                     })}
-                    <tr className="border-t border-border-strong bg-surface-2 font-bold text-ink">
-                      <td className="px-4 py-2.5" colSpan={3}>Subtotal — {site}</td>
+                    <tr className={styles.subtotalRow}>
+                      <td className={styles.subtotalLabelCell} colSpan={3}>Subtotal — {site}</td>
                       {siteMonthTotals.map((t, i) => (
-                        <td key={i} className="px-3 py-2.5 text-right font-mono tabular-nums">{t.toLocaleString("pt-BR")}</td>
+                        <td key={i} className={styles.subtotalMonthCell}>{t.toLocaleString("pt-BR")}</td>
                       ))}
-                      <td className="px-4 py-2.5 text-right font-mono tabular-nums">{siteTotal.toLocaleString("pt-BR")}</td>
+                      <td className={styles.subtotalTotalCell}>{siteTotal.toLocaleString("pt-BR")}</td>
                     </tr>
                   </tbody>
                 </table>

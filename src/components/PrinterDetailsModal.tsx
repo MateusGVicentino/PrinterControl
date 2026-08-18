@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Dependências externas: react (useEffect/useState, para o mês selecionado
  * no gráfico) e lucide-react (ícones). Dependências locais: Modal (casca
@@ -14,6 +16,8 @@ import PrinterStatusBadge from "./PrinterStatusBadge";
 import { tonerChannelColor, tonerLevelColor } from "../lib/tonerColor";
 import { useToast } from "../lib/toast";
 import { useTheme } from "../lib/theme";
+import { cn } from "../lib/cn";
+import styles from "./PrinterDetailsModal.module.css";
 
 interface PrinterDetailsModalProps {
   printer: Printer | null;
@@ -23,8 +27,8 @@ interface PrinterDetailsModalProps {
 function Fact({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">{label}</p>
-      <p className="mt-0.5 text-sm font-semibold text-ink">{value}</p>
+      <p className={styles.factLabel}>{label}</p>
+      <p className={styles.factValue}>{value}</p>
     </div>
   );
 }
@@ -61,74 +65,68 @@ export default function PrinterDetailsModal({ printer, onClose }: PrinterDetails
       onClose={onClose}
       title={printer.name}
       subtitle={printer.model}
-      maxWidth="max-w-xl"
+      maxWidth="36rem"
       footer={
         <>
-          <button
-            onClick={handleTestPage}
-            className="flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-surface-2"
-          >
+          <button onClick={handleTestPage} className={styles.footerButton}>
             <FileText size={16} />
             Imprimir página de teste
           </button>
-          <a
-            href={`http://${printer.ip}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-600"
-          >
+          <a href={`http://${printer.ip}`} target="_blank" rel="noreferrer" className={styles.footerLink}>
             <ExternalLink size={16} />
             Acessar via web
           </a>
         </>
       }
     >
-      <div className="flex items-center gap-3 rounded-xl bg-surface-2 p-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-tint text-brand-700">
+      <div className={styles.summary}>
+        <div className={styles.summaryIcon}>
           <PrinterIcon size={20} />
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-ink">{printer.ip}</p>
-          <p className="text-[13px] text-ink-soft">{printer.department}</p>
+        <div className={styles.summaryText}>
+          <p className={styles.summaryIp}>{printer.ip}</p>
+          <p className={styles.summaryDept}>{printer.department}</p>
         </div>
         <PrinterStatusBadge status={printer.status} />
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <div className={styles.factsGrid}>
         <Fact label="Páginas impressas (período)" value={printer.pagesPrinted.toLocaleString("pt-BR")} />
         <Fact label="Última atividade" value={printer.lastSeen} />
         <Fact label="Endereço IP" value={printer.ip} />
       </div>
 
       {monthly.length > 0 && (
-        <div className="mt-5 rounded-xl border border-border bg-surface-2 p-4">
-          <div className="flex items-center justify-between">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Impressões por mês</p>
+        <div className={styles.monthlyCard}>
+          <div className={styles.monthlyHeader}>
+            <p className={styles.factLabel}>Impressões por mês</p>
             {activeMonth && (
-              <span className="rounded-full bg-brand-tint px-2.5 py-1 text-xs font-semibold text-brand-700">
+              <span className={styles.monthlyBadge}>
                 {activeMonth.month}: {activeMonth.pages.toLocaleString("pt-BR")}
               </span>
             )}
           </div>
-          {activeMonth && <p className="mt-1 text-xs text-ink-faint">Período: {activeMonth.period}</p>}
-          <div className="mt-4 flex items-end gap-2">
+          {activeMonth && <p className={styles.monthlyPeriod}>Período: {activeMonth.period}</p>}
+          <div className={styles.monthlyBars}>
             {monthly.map((m) => {
               const active = activeMonth?.month === m.month;
               return (
                 <button
                   key={m.month}
                   onClick={() => setSelectedMonth(m.month)}
-                  className="flex flex-1 flex-col items-center gap-1.5"
+                  className={styles.monthlyBarButton}
                   title={`${m.month}: ${m.pages.toLocaleString("pt-BR")} páginas`}
                 >
-                  <span className={`text-[11px] font-semibold ${active ? "text-brand-700" : "text-ink-faint"}`}>
+                  <span className={cn(styles.monthlyBarLabel, active ? styles.monthlyBarLabelActive : styles.monthlyBarLabelInactive)}>
                     {m.pages > 999 ? `${Math.round(m.pages / 1000)}k` : m.pages}
                   </span>
                   <div
-                    className={`w-full rounded-t-md transition-colors ${active ? "bg-brand" : "bg-surface-sunken hover:bg-border-strong"}`}
+                    className={cn(styles.monthlyBar, active ? styles.monthlyBarActive : styles.monthlyBarInactive)}
                     style={{ height: `${8 + (m.pages / maxMonthPages) * 64}px` }}
                   />
-                  <span className={`text-[11px] font-medium ${active ? "text-ink" : "text-ink-faint"}`}>{m.month}</span>
+                  <span className={cn(styles.monthlyBarMonth, active ? styles.monthlyBarMonthActive : styles.monthlyBarMonthInactive)}>
+                    {m.month}
+                  </span>
                 </button>
               );
             })}
@@ -137,22 +135,19 @@ export default function PrinterDetailsModal({ printer, onClose }: PrinterDetails
       )}
 
       {printer.toner && printer.toner.length > 0 && (
-        <div className="mt-5">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-faint">Níveis de suprimento</p>
-          <div className="mt-3 flex flex-col gap-3">
+        <div className={styles.supplySection}>
+          <p className={styles.factLabel}>Níveis de suprimento</p>
+          <div className={styles.supplyList}>
             {printer.toner.map((t) => (
               <div key={t.color}>
-                <div className="mb-1 flex items-center justify-between text-sm">
-                  <span className="text-ink-soft">{t.label}</span>
-                  <span className="font-semibold" style={{ color: tonerLevelColor(t.percent) }}>
+                <div className={styles.supplyRow}>
+                  <span className={styles.supplyLabel}>{t.label}</span>
+                  <span className={styles.supplyPercent} style={{ color: tonerLevelColor(t.percent) }}>
                     {t.percent}%
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-surface-sunken">
-                  <div
-                    className="h-full rounded-full"
-                    style={{ width: `${t.percent}%`, backgroundColor: tonerChannelColor(t.color, theme) }}
-                  />
+                <div className={styles.supplyTrack}>
+                  <div className={styles.supplyFill} style={{ width: `${t.percent}%`, backgroundColor: tonerChannelColor(t.color, theme) }} />
                 </div>
               </div>
             ))}
@@ -161,11 +156,11 @@ export default function PrinterDetailsModal({ printer, onClose }: PrinterDetails
       )}
 
       {needsAttention && lowest && (
-        <div className="mt-5 flex items-start gap-3 rounded-xl border border-warning/25 bg-warning-tint p-4">
-          <Lightbulb size={18} className="mt-0.5 shrink-0 text-warning" />
+        <div className={styles.recommendation}>
+          <Lightbulb size={18} className={styles.recommendationIcon} />
           <div>
-            <p className="text-sm font-semibold text-ink">Recomendação</p>
-            <p className="mt-0.5 text-[13px] leading-relaxed text-ink-soft">
+            <p className={styles.recommendationTitle}>Recomendação</p>
+            <p className={styles.recommendationText}>
               O nível de {lowest.label.toLowerCase()} está em {lowest.percent}%. Programe a troca do cartucho
               nos próximos dias para evitar interrupção no departamento {printer.department}.
             </p>

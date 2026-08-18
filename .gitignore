@@ -18,6 +18,24 @@ dist-ssr
 # pertence ao repositório.
 public/data/*.json
 
+# Next.js build output
+.next/
+
+# Python
+backend/venv/
+backend/__pycache__/
+**/__pycache__/
+*.pyc
+backend/*.db
+
+# Env / secrets
+.env
+backend/.env
+.claude/scheduled_tasks.lock
+
+# Serena tool cache
+.serena/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

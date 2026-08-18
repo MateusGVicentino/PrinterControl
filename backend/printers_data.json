@@ -1,0 +1,766 @@
+{
+  "printers": [
+    {
+      "id": 1,
+      "name": "VLO_Diretoria",
+      "ip": "10.150.26.40",
+      "model": "SP_BM5100ADW_DIRETORIA",
+      "department": "Diretoria — Vila Olímpia",
+      "status": "online",
+      "page_count": 1984
+    },
+    {
+      "id": 2,
+      "name": "VLO_Administracao_geral_1",
+      "ip": "10.150.26.41",
+      "model": "SP_BM5100ADW_ADM_01",
+      "department": "Administração geral 1 — Vila Olímpia",
+      "status": "atencao",
+      "page_count": 997
+    },
+    {
+      "id": 3,
+      "name": "VLO_Administracao_geral_2",
+      "ip": "10.150.26.42",
+      "model": "SP_BM5100ADW_ADM_02",
+      "department": "Administração geral 2 — Vila Olímpia",
+      "status": "online",
+      "page_count": 9122
+    },
+    {
+      "id": 4,
+      "name": "VLO_Diretoria_2",
+      "ip": "10.150.6.10",
+      "model": "SP_CANON_DIRETORIA",
+      "department": "Diretoria — Vila Olímpia",
+      "status": "online"
+    },
+    {
+      "id": 5,
+      "name": "VLO_Administracao_geral_1_2",
+      "ip": "10.150.6.11",
+      "model": "SP_CANON_ADM_01",
+      "department": "Administração geral 1 — Vila Olímpia",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 6,
+      "name": "VLO_Administracao_geral_2_2",
+      "ip": "10.150.6.12",
+      "model": "SP_CANON_ADM_02",
+      "department": "Administração geral 2 — Vila Olímpia",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 7,
+      "name": "VLO_Administracao_Geral",
+      "ip": "10.150.26.50",
+      "model": "VLO_M3655idn",
+      "department": "Administração Geral — Vila Olímpia",
+      "status": "atencao",
+      "page_count": 1267
+    },
+    {
+      "id": 8,
+      "name": "VLO_Diretoria_3",
+      "ip": "10.150.5.166",
+      "model": "VLO_RICOH_C251FW_DIRETORIA",
+      "department": "Diretoria — Vila Olímpia",
+      "status": "online"
+    },
+    {
+      "id": 9,
+      "name": "MC_HDB_PISO_INFERIOR_PCP",
+      "ip": "10.20.7.76",
+      "model": "TASKalfa 3501i",
+      "department": "HDB - PISO INFERIOR (PCP) — MC",
+      "status": "atencao",
+      "page_count": 100248
+    },
+    {
+      "id": 10,
+      "name": "MC_HDB_PISO_SUPERIOR",
+      "ip": "10.20.6.165",
+      "model": "Kyocera M3040",
+      "department": "HDB - PISO SUPERIOR — MC",
+      "status": "online",
+      "page_count": 640
+    },
+    {
+      "id": 11,
+      "name": "MC_HDB_DIRETOR_CAIO",
+      "ip": "10.20.7.99",
+      "model": "Kyocera M2040",
+      "department": "HDB- DIRETOR CAIO — MC",
+      "status": "online",
+      "page_count": 2098
+    },
+    {
+      "id": 12,
+      "name": "MC_HDB_RECEBIMENTO",
+      "ip": "10.22.0.7",
+      "model": "Kyocera M2040",
+      "department": "HDB - RECEBIMENTO — MC",
+      "status": "online",
+      "page_count": 15383
+    },
+    {
+      "id": 13,
+      "name": "MC_HDB_QLD_PROD",
+      "ip": "10.22.0.252",
+      "model": "Kyocera M2040",
+      "department": "HDB - QLD/PROD — MC",
+      "status": "online",
+      "page_count": 4105
+    },
+    {
+      "id": 14,
+      "name": "MC_PCP_HDB",
+      "ip": "10.20.9.2",
+      "model": "Ricoh M320F",
+      "department": "PCP HDB — MC",
+      "status": "online",
+      "page_count": 33392
+    },
+    {
+      "id": 15,
+      "name": "MC_Refrigeracao_ADM",
+      "ip": "10.20.3.4",
+      "model": "Kyocera M2035",
+      "department": "Refrigeração (ADM) — MC",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 16,
+      "name": "MC_Backup_TI",
+      "ip": "N/A",
+      "model": "Kyocera M2035",
+      "department": "Backup TI — MC",
+      "status": "offline",
+      "page_count": 6521
+    },
+    {
+      "id": 17,
+      "name": "MC_Engenharia_Refrigeraca",
+      "ip": "10.22.0.20",
+      "model": "Kyocera FS-6530",
+      "department": "Engenharia Refrigeração — MC",
+      "status": "online",
+      "page_count": 1298
+    },
+    {
+      "id": 18,
+      "name": "MC_Seguranca",
+      "ip": "10.20.3.6",
+      "model": "Kyocera M2035",
+      "department": "Segurança — MC",
+      "status": "online",
+      "page_count": 12173
+    },
+    {
+      "id": 19,
+      "name": "MC_Engenharia_de_Ar",
+      "ip": "10.20.3.7",
+      "model": "Kyocera M3040",
+      "department": "Engenharia de Ar — MC",
+      "status": "online",
+      "page_count": 15120
+    },
+    {
+      "id": 20,
+      "name": "MC_Automacao_Ademir",
+      "ip": "10.22.4.13",
+      "model": "Kyocera P2135",
+      "department": "Automação (Ademir) — MC",
+      "status": "online",
+      "page_count": 4144
+    },
+    {
+      "id": 21,
+      "name": "MC_Ambulatorio_Mogi",
+      "ip": "10.20.6.237",
+      "model": "Kyocera M2035",
+      "department": "Ambulatório Mogi — MC",
+      "status": "online",
+      "page_count": 1938
+    },
+    {
+      "id": 22,
+      "name": "MC_Recebimento_Fundo",
+      "ip": "10.20.7.94",
+      "model": "Ricoh M320F",
+      "department": "Recebimento (Fundo) — MC",
+      "status": "online",
+      "page_count": 1879
+    },
+    {
+      "id": 23,
+      "name": "MC_Automacao_sala_Rose",
+      "ip": "10.22.4.8",
+      "model": "Kyocera P2135",
+      "department": "Automação (sala Rose) — MC",
+      "status": "online",
+      "page_count": 1088
+    },
+    {
+      "id": 24,
+      "name": "MC_Administracao_RH",
+      "ip": "10.22.2.14",
+      "model": "Kyocera M2035",
+      "department": "Administração (RH) — MC",
+      "status": "online",
+      "page_count": 6979
+    },
+    {
+      "id": 25,
+      "name": "MC_Engenharia_de_Refriger",
+      "ip": "10.20.3.18",
+      "model": "Kyocera M2535",
+      "department": "Engenharia de Refrigeração — MC",
+      "status": "online",
+      "page_count": 125
+    },
+    {
+      "id": 26,
+      "name": "MC_Backup_TI_Faturamento_",
+      "ip": "N/A",
+      "model": "Kyocera P3055",
+      "department": "Backup TI - Faturamento Logística — MC",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 27,
+      "name": "MC_Manutencao_HDB",
+      "ip": "10.20.3.26",
+      "model": "Kyocera FS-4200",
+      "department": "Manutenção HDB — MC",
+      "status": "online",
+      "page_count": 1746
+    },
+    {
+      "id": 28,
+      "name": "MC_Automacao_Recebimento_",
+      "ip": "10.22.4.19",
+      "model": "Kyocera M2035",
+      "department": "Automação (Recebimento - entrada) — MC",
+      "status": "online",
+      "page_count": 5021
+    },
+    {
+      "id": 29,
+      "name": "MC_Entreposto_Delog_2_Log",
+      "ip": "10.21.0.63",
+      "model": "Kyocera M2040",
+      "department": "Entreposto/Delog 2 (Logística) — MC",
+      "status": "online",
+      "page_count": 1814
+    },
+    {
+      "id": 30,
+      "name": "MC_Servicos_Depecas",
+      "ip": "10.22.2.30",
+      "model": "Kyocera P2135",
+      "department": "Serviços (Depeças) — MC",
+      "status": "online",
+      "page_count": 1261
+    },
+    {
+      "id": 31,
+      "name": "MC_Logistica_ADM",
+      "ip": "10.20.6.232",
+      "model": "Kyocera M3040",
+      "department": "Logística (ADM) — MC",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 32,
+      "name": "MC_Logistica_Fatura",
+      "ip": "10.20.19.4",
+      "model": "Kyocera P3055",
+      "department": "Logística (Fatura) — MC",
+      "status": "online",
+      "page_count": 69929
+    },
+    {
+      "id": 33,
+      "name": "MC_Depecas_Refrigeracao",
+      "ip": "10.21.0.20",
+      "model": "Kyocera P3055",
+      "department": "Depeças Refrigeração — MC",
+      "status": "online",
+      "page_count": 1355
+    },
+    {
+      "id": 34,
+      "name": "MC_Backup_TI_2",
+      "ip": "N/A",
+      "model": "Ricoh M320F",
+      "department": "Backup TI — MC",
+      "status": "offline",
+      "page_count": 284
+    },
+    {
+      "id": 35,
+      "name": "MC_Automacao_Hamilton",
+      "ip": "10.22.4.25",
+      "model": "Kyocera M2040",
+      "department": "Automação (Hamilton) — MC",
+      "status": "online",
+      "page_count": 20227
+    },
+    {
+      "id": 36,
+      "name": "MC_Depecas_faturamento_SP",
+      "ip": "10.20.6.110",
+      "model": "Ricoh P502",
+      "department": "Depeças faturamento (SP) — MC",
+      "status": "online",
+      "page_count": 1372
+    },
+    {
+      "id": 37,
+      "name": "MC_Recebimento_SP",
+      "ip": "10.20.7.131",
+      "model": "Kyocera M2035",
+      "department": "Recebimento (SP) — MC",
+      "status": "online",
+      "page_count": 27010
+    },
+    {
+      "id": 38,
+      "name": "MC_Producao_DCFA_HDB",
+      "ip": "10.22.0.12",
+      "model": "P2135",
+      "department": "Produção DCFA - HDB — MC",
+      "status": "online",
+      "page_count": 3893
+    },
+    {
+      "id": 39,
+      "name": "MC_Qualidade_HDB",
+      "ip": "10.22.0.42",
+      "model": "M2535",
+      "department": "Qualidade HDB — MC",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 40,
+      "name": "MC_DEPE",
+      "ip": "10.160.26.110",
+      "model": "Ricoh P311",
+      "department": "DEPE — MC",
+      "status": "online",
+      "page_count": 25638
+    },
+    {
+      "id": 41,
+      "name": "ITJ_Logistica_ADM",
+      "ip": "10.70.0.11",
+      "model": "Ricoh M320F",
+      "department": "Logística (ADM) — Itajaí",
+      "status": "online",
+      "page_count": 20404
+    },
+    {
+      "id": 42,
+      "name": "ITJ_Logistica_Fatura",
+      "ip": "10.70.0.12",
+      "model": "Ricoh P502",
+      "department": "Logística (Fatura) — Itajaí",
+      "status": "online",
+      "page_count": 31077
+    },
+    {
+      "id": 43,
+      "name": "ITJ_Backup",
+      "ip": "N/A",
+      "model": "Ricoh P502",
+      "department": "Backup — Itajaí",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 44,
+      "name": "ITJ_CD_Horus_Itajai",
+      "ip": "10.70.0.61",
+      "model": "Kyocera M2040",
+      "department": "CD Hórus Itajaí — Itajaí",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 45,
+      "name": "ITJ_Logistica_Adequacao",
+      "ip": "10.70.0.61",
+      "model": "Ricoh M320F",
+      "department": "Logística (Adequação) — Itajaí",
+      "status": "online",
+      "page_count": 9718
+    },
+    {
+      "id": 46,
+      "name": "ITJ_Backup_Joinville",
+      "ip": "N/A",
+      "model": "Kyocera M2035",
+      "department": "Backup Joinville — Itajaí",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 47,
+      "name": "ITJ_Logistica_ADM_Joinvill",
+      "ip": "10.210.31.2",
+      "model": "Ricoh M320F",
+      "department": "Logística (ADM) Joinville — Itajaí",
+      "status": "online",
+      "page_count": 7454
+    },
+    {
+      "id": 48,
+      "name": "ITJ_Logistica_Fatura_Joinv",
+      "ip": "10.210.31.3",
+      "model": "Kyocera P3045",
+      "department": "Logística (Fatura) Joinville — Itajaí",
+      "status": "atencao",
+      "page_count": 22467
+    },
+    {
+      "id": 49,
+      "name": "ITJ_Adequacao",
+      "ip": "192.168.30.32",
+      "model": "Ricoh M320F",
+      "department": "Adequação — Itajaí",
+      "status": "online",
+      "page_count": 7617
+    },
+    {
+      "id": 50,
+      "name": "MAN1_Qualidade_Recebimento",
+      "ip": "10.30.1.94",
+      "model": "Kyocera M2035",
+      "department": "Qualidade Recebimento — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 3057
+    },
+    {
+      "id": 51,
+      "name": "MAN1_Recebimento",
+      "ip": "10.30.4.21",
+      "model": "Ricoh M320F",
+      "department": "Recebimento — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 96995
+    },
+    {
+      "id": 52,
+      "name": "MAN1_Estoque_Semat",
+      "ip": "10.30.1.61",
+      "model": "Kyocera P2135",
+      "department": "Estoque (Semat) — Manaus 1 - Ar Condicionado",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 53,
+      "name": "MAN1_Producao_galpao_1",
+      "ip": "10.30.1.64",
+      "model": "Kyocera M2035",
+      "department": "Produção (galpão 1) — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 4922
+    },
+    {
+      "id": 54,
+      "name": "MAN1_Administracao_Geral",
+      "ip": "10.30.1.66",
+      "model": "Kyocera M3040",
+      "department": "Administração (Geral) — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 48823
+    },
+    {
+      "id": 55,
+      "name": "MAN1_Qualidade",
+      "ip": "10.30.1.69",
+      "model": "Kyocera M2040",
+      "department": "Qualidade — Manaus 1 - Ar Condicionado",
+      "status": "atencao",
+      "page_count": 15740
+    },
+    {
+      "id": 56,
+      "name": "MAN1_Producao_galpao_4",
+      "ip": "10.30.4.26",
+      "model": "Kyocera M2040",
+      "department": "Produção (galpão 4) — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 32008
+    },
+    {
+      "id": 57,
+      "name": "MAN1_Expedicao",
+      "ip": "10.30.4.25",
+      "model": "Kyocera M3040",
+      "department": "Expedição — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 12642
+    },
+    {
+      "id": 58,
+      "name": "MAN1_Backup",
+      "ip": "N/A",
+      "model": "Kyocera P3145",
+      "department": "Backup — Manaus 1 - Ar Condicionado",
+      "status": "offline",
+      "page_count": 21543
+    },
+    {
+      "id": 59,
+      "name": "MAN1_Backup_2",
+      "ip": "N/A",
+      "model": "Kyocera P3145",
+      "department": "Backup — Manaus 1 - Ar Condicionado",
+      "status": "offline",
+      "page_count": 10223
+    },
+    {
+      "id": 60,
+      "name": "MAN1_Recebimento_G1",
+      "ip": "10.30.1.92",
+      "model": "Ricoh M320F",
+      "department": "Recebimento (G1) — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 4859
+    },
+    {
+      "id": 61,
+      "name": "MAN1_SEMAT_PCP",
+      "ip": "10.30.4.19",
+      "model": "Kyocera M2035",
+      "department": "SEMAT/PCP — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 24608
+    },
+    {
+      "id": 62,
+      "name": "MAN1_Qualidade_Recebimento_2",
+      "ip": "10.30.3.21",
+      "model": "Ricoh M320F",
+      "department": "Qualidade Recebimento — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 4795
+    },
+    {
+      "id": 63,
+      "name": "MAN1_Administracao_G4",
+      "ip": "10.30.1.93",
+      "model": "Ricoh P311",
+      "department": "Administração G4 — Manaus 1 - Ar Condicionado",
+      "status": "online",
+      "page_count": 9735
+    },
+    {
+      "id": 64,
+      "name": "MAN1_Backup_3",
+      "ip": "N/A",
+      "model": "Ricoh P311",
+      "department": "Backup — Manaus 1 - Ar Condicionado",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 65,
+      "name": "MAN1_Backup_TI",
+      "ip": "N/A",
+      "model": "FS4200",
+      "department": "Backup TI — Manaus 1 - Ar Condicionado",
+      "status": "offline",
+      "page_count": 381
+    },
+    {
+      "id": 66,
+      "name": "MAN2_Administracao_Geral",
+      "ip": "10.50.1.20",
+      "model": "Kyocera M2035",
+      "department": "Administração (Geral) — Manaus 2 - Automação",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 67,
+      "name": "MAN2_Expedicao",
+      "ip": "10.50.1.21",
+      "model": "Kyocera M2040",
+      "department": "Expedição — Manaus 2 - Automação",
+      "status": "online",
+      "page_count": 7278
+    },
+    {
+      "id": 68,
+      "name": "MAN2_Administracao_Geral_2",
+      "ip": "10.50.1.29",
+      "model": "Kyocera M2040",
+      "department": "Administração (Geral 2) — Manaus 2 - Automação",
+      "status": "atencao",
+      "page_count": 6103
+    },
+    {
+      "id": 69,
+      "name": "MAN3_Administracao_Geral",
+      "ip": "10.60.0.50",
+      "model": "Kyocera M2040",
+      "department": "Administração (Geral) — Manaus 3 - Logística",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 70,
+      "name": "MAN3_Logistica_fatura",
+      "ip": "10.60.0.30",
+      "model": "Kyocera P3145",
+      "department": "Logística (fatura) — Manaus 3 - Logística",
+      "status": "online",
+      "page_count": 29256
+    },
+    {
+      "id": 71,
+      "name": "MAN3_Backup",
+      "ip": "10.60.0.32",
+      "model": "Kyocera M2040",
+      "department": "Backup — Manaus 3 - Logística",
+      "status": "online",
+      "page_count": 2352
+    },
+    {
+      "id": 72,
+      "name": "MAN3_Recebimento",
+      "ip": "10.60.1.199",
+      "model": "Kyocera P3145",
+      "department": "Recebimento — Manaus 3 - Logística",
+      "status": "online",
+      "page_count": 57402
+    },
+    {
+      "id": 73,
+      "name": "MAN3_Administracao_Bemol",
+      "ip": "10.60.1.20",
+      "model": "Kyocera M3040",
+      "department": "Administração - Bemol — Manaus 3 - Logística",
+      "status": "online",
+      "page_count": 7634
+    },
+    {
+      "id": 74,
+      "name": "MAN3_Operacao_fracionado",
+      "ip": "10.60.0.158",
+      "model": "Kyocera P2135",
+      "department": "Operação fracionado — Manaus 3 - Logística",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 75,
+      "name": "JUN_Administracao_Logistic",
+      "ip": "10.36.0.16",
+      "model": "Kyocera M3040",
+      "department": "Administração Logística (galpão 11) — Jundiaí",
+      "status": "online",
+      "page_count": 5413
+    },
+    {
+      "id": 76,
+      "name": "JUN_Faturamento_Logistica_",
+      "ip": "10.36.0.15",
+      "model": "Kyocera P3055",
+      "department": "Faturamento Logística (galpão 11) — Jundiaí",
+      "status": "online",
+      "page_count": 50937
+    },
+    {
+      "id": 77,
+      "name": "JUN_Operacao_Solar_galpao_",
+      "ip": "10.2.0.251",
+      "model": "Ricoh P311",
+      "department": "Operação Solar (galpão 12) — Jundiaí",
+      "status": "online",
+      "page_count": 2281
+    },
+    {
+      "id": 78,
+      "name": "JUN_Backup",
+      "ip": "N/A",
+      "model": "Kyocera P3055",
+      "department": "Backup — Jundiaí",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 79,
+      "name": "JUN_Faturamento_Solar_galp",
+      "ip": "10.36.0.24",
+      "model": "Ricoh P502",
+      "department": "Faturamento Solar (galpão 12) — Jundiaí",
+      "status": "online",
+      "page_count": 26914
+    },
+    {
+      "id": 80,
+      "name": "JUN_Backup_2",
+      "ip": "N/A",
+      "model": "Ricoh P502",
+      "department": "Backup — Jundiaí",
+      "status": "offline",
+      "page_count": 0
+    },
+    {
+      "id": 81,
+      "name": "CSA_Administracao",
+      "ip": "10.170.26.16",
+      "model": "Ricoh IM C400",
+      "department": "Administração — Cabo de Santo Agostinho",
+      "status": "online",
+      "page_count": 295
+    },
+    {
+      "id": 82,
+      "name": "CSA_Faturamento",
+      "ip": "10.170.26.15",
+      "model": "Kyocera P3055",
+      "department": "Faturamento — Cabo de Santo Agostinho",
+      "status": "online",
+      "page_count": 9152
+    },
+    {
+      "id": 83,
+      "name": "CSA_Backup_faturamento",
+      "ip": "N/A",
+      "model": "Kyocera P3055",
+      "department": "Backup faturamento — Cabo de Santo Agostinho",
+      "status": "offline",
+      "page_count": 141
+    },
+    {
+      "id": 84,
+      "name": "COL_Qualidade_HDB",
+      "ip": "10.22.0.84",
+      "model": "Kyocera M5021cdn",
+      "department": "Qualidade HDB — Coloridas (multi-site)",
+      "status": "online"
+    },
+    {
+      "id": 85,
+      "name": "COL_Logistica_Jundiai",
+      "ip": "10.2.0.254",
+      "model": "Kyocera M6530cdn",
+      "department": "Logística Jundiaí — Coloridas (multi-site)",
+      "status": "online"
+    }
+  ],
+  "count": 85
+}

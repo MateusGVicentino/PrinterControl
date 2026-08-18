@@ -1,0 +1,71 @@
+.scanBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 12px;
+  color: var(--color-ink-faint);
+}
+
+.scanBarStrong {
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.scanButton {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+  transition: background-color 0.15s;
+}
+
+.scanButton:hover {
+  background: var(--color-brand-tint);
+}
+
+.scanButton:disabled {
+  opacity: 0.6;
+}
+
+.statsSkeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .statsSkeletonGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.skeletonCard {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
+.skeletonCardStats {
+  height: 124px;
+}
+
+.skeletonCardTable {
+  height: 520px;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 1280px) {
+  .mainGrid {
+    grid-template-columns: minmax(0, 1fr) 296px;
+  }
+}

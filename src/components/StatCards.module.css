@@ -1,0 +1,95 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.25rem;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardInactive {
+  border-color: var(--color-border);
+}
+
+.activeBrand {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand) 30%, transparent);
+}
+
+.activeSuccess {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-success) 30%, transparent);
+}
+
+.activeCritical {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-critical) 30%, transparent);
+}
+
+.activeWarning {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-warning) 30%, transparent);
+}
+
+.cardHeader {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.iconWrap {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+.iconBrand { background: var(--color-brand-tint); color: var(--color-brand-700); }
+.iconSuccess { background: var(--color-success-tint); color: var(--color-success); }
+.iconCritical { background: var(--color-critical-tint); color: var(--color-critical); }
+.iconWarning { background: var(--color-warning-tint); color: var(--color-warning); }
+
+.value {
+  margin-top: 0.75rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.sublabel {
+  margin-top: 0.375rem;
+  font-size: 13px;
+  color: var(--color-ink-faint);
+}

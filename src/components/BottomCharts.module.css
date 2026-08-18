@@ -1,0 +1,156 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardFlexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.emptyText {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-faint);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.periodBadge {
+  border-radius: 999px;
+  background: var(--color-brand-tint);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.periodText {
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  color: var(--color-ink-faint);
+}
+
+.chartWrap {
+  margin-top: 0.75rem;
+  height: 12rem;
+}
+
+.totalValue {
+  margin-top: 0.75rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+.growthRow {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.growthUp {
+  color: var(--color-success);
+}
+
+.growthDown {
+  color: var(--color-critical);
+}
+
+.growthLabel {
+  font-weight: 400;
+  color: var(--color-ink-faint);
+}
+
+.barsRow {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+}
+
+.bar {
+  flex: 1 1 0%;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: color-mix(in srgb, var(--color-brand) 80%, transparent);
+}
+
+.donutRow {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.donutWrap {
+  position: relative;
+  height: 8rem;
+  width: 8rem;
+  flex-shrink: 0;
+}
+
+.donutCenter {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attentionValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-warning);
+}
+
+.attentionPct {
+  font-size: 0.875rem;
+  color: var(--color-ink-faint);
+}
+
+.viewAllButton {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brand-700);
+}
+
+.viewAllButton:hover {
+  color: var(--color-brand-600);
+}
