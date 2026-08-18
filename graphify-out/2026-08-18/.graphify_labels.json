@@ -10,7 +10,7 @@
   "8": "useAppData",
   "9": "ComingSoon.tsx",
   "10": "plugins",
-  "11": "types.ts",
+  "11": "Printer",
   "12": "graphify (knowledge graph tool)",
   "13": "next.config.ts",
   "14": "Elgin (Brand)",
@@ -18,5 +18,7 @@
   "16": "npm run build",
   "17": "npm run dev",
   "18": "next-env.d.ts",
-  "19": "navIds.ts"
+  "19": "navIds.ts",
+  "20": "TonerMonitoring.tsx",
+  "21": "Login.tsx"
 }

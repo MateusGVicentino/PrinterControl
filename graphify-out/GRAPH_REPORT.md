@@ -1,16 +1,16 @@
 # Graph Report - PrinterControl  (2026-08-18)
 
 ## Corpus Check
-- 66 files · ~30,505 words
+- 93 files · ~37,754 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 369 nodes · 707 edges · 22 communities (14 shown, 8 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.57)
+- 583 nodes · 1106 edges · 28 communities (20 shown, 8 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 36 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1382e6ac`
+- Built from commit: `7c94a0ad`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,14 +19,14 @@
 - package.json
 - cn
 - Coletar-Impressoras.ps1
-- theme.tsx
+- SNMPClient
 - Elgin Impressoras (painel de monitoramento)
 - compilerOptions
-- Sidebar.tsx
+- routes/auth.py
 - useAppData
 - ComingSoon.tsx
 - plugins
-- Printer
+- HistoryMatrix.tsx
 - graphify (knowledge graph tool)
 - next.config.ts
 - Elgin (Brand)
@@ -35,20 +35,21 @@
 - npm run dev
 - next-env.d.ts
 - navIds.ts
-- TonerMonitoring.tsx
-- Login.tsx
+- SNMPResult
+- printers.py
+- tests_collect_api.py
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 31 edges
-2. `Printer` - 25 edges
+1. `SNMPClient` - 32 edges
+2. `cn()` - 31 edges
 3. `useAppData()` - 21 edges
 4. `Elgin Impressoras (painel de monitoramento)` - 20 edges
-5. `compilerOptions` - 19 edges
-6. `useToast()` - 17 edges
-7. `react` - 16 edges
-8. `useTheme()` - 16 edges
-9. `AppDataProvider()` - 15 edges
-10. `PrinterTable()` - 11 edges
+5. `SNMPResult` - 19 edges
+6. `compilerOptions` - 19 edges
+7. `useToast()` - 17 edges
+8. `PrinterCollector` - 16 edges
+9. `useTheme()` - 16 edges
+10. `Printer` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Lucide` --conceptually_related_to--> `Elgin Impressoras (painel de monitoramento)`  [EXTRACTED]
@@ -70,83 +71,87 @@
 - **Stack tecnológico do painel (Vite/React/TS/Tailwind/Recharts/Lucide)** — readme_vite, readme_react, readme_typescript, readme_tailwind_css_v4, readme_recharts, readme_lucide [EXTRACTED 1.00]
 - **Arquitetura de dados de 3 modos (Demo/Real/Simulado)** — contexto_desenvolvimento_elgin_impressoras, contexto_desenvolvimento_modo_demo, contexto_desenvolvimento_modo_real, contexto_desenvolvimento_modo_simulado [EXTRACTED 1.00]
 
-## Communities (22 total, 8 thin omitted)
+## Communities (28 total, 8 thin omitted)
 
 ### Community 0 - "app-data.tsx"
-Cohesion: 0.09
-Nodes (29): Levantamento_impressões (planilha original), DecommissionedList(), DecommissionedListProps, DepartmentBreakdown(), DepartmentBreakdownProps, MONTHS, Account, ACCOUNTS (+21 more)
+Cohesion: 0.06
+Nodes (46): Levantamento_impressões (planilha original), AlertsPage(), AlertBanner(), AlertBannerProps, AlertsView(), AlertsViewProps, DepartmentBreakdownProps, MONTHS (+38 more)
 
 ### Community 1 - "package.json"
 Cohesion: 0.06
 Nodes (31): lucide-react, next, oxlint, dependencies, lucide-react, next, react, react-dom (+23 more)
 
 ### Community 2 - "cn"
-Cohesion: 0.09
-Nodes (33): AlertsPage(), DashboardPage(), AlertBanner(), AlertBannerProps, AlertsView(), AlertsViewProps, AlertsDonutCardProps, BottomCharts() (+25 more)
+Cohesion: 0.05
+Nodes (51): DashboardPage(), AlertsDonutCard(), AlertsDonutCardProps, BottomCharts(), BottomChartsProps, PagesConsumedCard(), TotalPrintsCard(), MonthlyCounters() (+43 more)
 
 ### Community 3 - "Coletar-Impressoras.ps1"
 Cohesion: 0.09
 Nodes (21): Modo Real, Modo Simulado, Contador mensal calculado por diff de duas leituras SNMP acumulativas (não existe OID de páginas do mês), Scripts PowerShell reais nunca rodaram de verdade (sem interpretador PowerShell no ambiente de dev), public/data/monthly-report.json, public/data/printers.json, Arquivos de dados gerados são ignorados pelo git — gerar/apagar localmente nunca afeta o repositório, Impressoras simuladas usam prefixo SIM_ / departamentos TESTE - de propósito, pra nunca confundir com dado real (+13 more)
 
-### Community 4 - "theme.tsx"
-Cohesion: 0.14
-Nodes (11): ibmPlexMono, metadata, publicSans, sourceSerif, Providers(), getInitialTheme(), Theme, ThemeContext (+3 more)
+### Community 4 - "SNMPClient"
+Cohesion: 0.05
+Nodes (40): Agente SNMP simulado — APENAS PARA TESTE LOCAL. Existe porque a maquina de…, _toner(), parse_varbinds(), SNMP Collector para impressoras. Porte direto da funcao Get-TonerSNMP de…, Decodifica um OID BER para notacao pontuada., Decodifica bytes BER como inteiro sem sinal., Extrai a lista de varbinds de uma resposta SNMP. Percorre a estrutura completa…, Cliente SNMP para coleta de impressoras (Printer-MIB, RFC 3805). (+32 more)
 
 ### Community 5 - "Elgin Impressoras (painel de monitoramento)"
-Cohesion: 0.10
-Nodes (21): Tela Alertas, Tela Dashboard, Elgin Impressoras (painel de monitoramento), Tela Histórico, Tela Impressoras, Tela Login, Migração futura para FastAPI (Python) + Next.js + banco de dados, Modo claro/escuro (toggle) (+13 more)
+Cohesion: 0.06
+Nodes (31): Tela Alertas, Tela Dashboard, Elgin Impressoras (painel de monitoramento), Tela Histórico, Tela Impressoras, Tela Login, Migração futura para FastAPI (Python) + Next.js + banco de dados, Modo claro/escuro (toggle) (+23 more)
 
 ### Community 6 - "compilerOptions"
 Cohesion: 0.06
 Nodes (30): dom, dom.iterable, esnext, .next/dev/types/**/*.ts, next-env.d.ts, .next/types/**/*.ts, node_modules, **/*.ts (+22 more)
 
-### Community 7 - "Sidebar.tsx"
-Cohesion: 0.18
-Nodes (13): AlertsDonutCard(), PagesConsumedCard(), NavItem(), NavItemProps, Sidebar(), SidebarProps, sparkData, networkHistory (+5 more)
+### Community 7 - "routes/auth.py"
+Cohesion: 0.09
+Nodes (35): Config, Settings, create_db_and_tables(), get_session(), health_check(), on_startup(), get, read_root() (+27 more)
 
 ### Community 8 - "useAppData"
-Cohesion: 0.10
-Nodes (22): react, PrintersPage(), ReportsPage(), AppShell(), AuthGate(), Modal(), ModalProps, PrinterDetailsModal() (+14 more)
+Cohesion: 0.07
+Nodes (32): react, ibmPlexMono, metadata, publicSans, sourceSerif, PrintersPage(), Providers(), ReportsPage() (+24 more)
 
 ### Community 10 - "plugins"
 Cohesion: 0.22
 Nodes (8): plugins, rules, react/only-export-components, react/rules-of-hooks, $schema, oxc, typescript, warn
 
-### Community 11 - "Printer"
-Cohesion: 0.16
-Nodes (12): HistoryPage(), HistoryMatrix(), HistoryMatrixProps, PrinterDetailsModalProps, PrinterRanking(), PrinterRankingProps, RankedPrinter, RankList() (+4 more)
+### Community 11 - "HistoryMatrix.tsx"
+Cohesion: 0.27
+Nodes (5): HistoryPage(), HistoryMatrix(), HistoryMatrixProps, getDepartmentLabel(), getPrinterSite()
 
 ### Community 12 - "graphify (knowledge graph tool)"
 Cohesion: 0.25
 Nodes (8): graphify (knowledge graph tool), graphify explain command, graphify path command, graphify query command, graphify update command, graphify-out/graph.json, graphify-out/GRAPH_REPORT.md, graphify-out/wiki/index.md
 
-### Community 20 - "TonerMonitoring.tsx"
-Cohesion: 0.13
-Nodes (15): TonerPage(), RightPanel(), RightPanelProps, classify(), FILTERS, SummaryCard(), SummaryCardProps, TONE (+7 more)
+### Community 20 - "SNMPResult"
+Cohesion: 0.06
+Nodes (27): list_scenarios(), get, Cenarios simulados disponiveis e se o modo mock esta habilitado., PrinterCollector, Session, Converte SNMPResult em PrinterReading. Toner ausente vira NULL (a coluna e…, Cenarios de teste disponiveis (fonte unica: snmp_mock.SCENARIOS)., Coleta uma impressora e grava o resultado como PrinterReading. (+19 more)
 
-### Community 21 - "Login.tsx"
-Cohesion: 0.14
-Nodes (10): Logo Elgin é redesenho à mão (IA sem acesso a imagens coladas no chat, só uploads), src/components/ (padrão com header-comment por arquivo), ElginLogo(), ElginLogoProps, ACTIVE_NODES, features, Login(), LoginProps (+2 more)
+### Community 21 - "printers.py"
+Cohesion: 0.11
+Nodes (33): Alert, SQLModel, TonerHistory, Printer, PrinterMonthly, PrinterReading, SQLModel, get_alert() (+25 more)
+
+### Community 22 - "tests_collect_api.py"
+Cohesion: 0.67
+Nodes (3): check(), main(), Teste ponta a ponta dos endpoints /api/collect com os cenarios simulados.…
 
 ## Knowledge Gaps
-- **120 isolated node(s):** `$schema`, `typescript`, `oxc`, `react/rules-of-hooks`, `warn` (+115 more)
+- **137 isolated node(s):** `Config`, `Config`, `nextConfig`, `name`, `private` (+132 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Elgin Impressoras (painel de monitoramento)` connect `Elgin Impressoras (painel de monitoramento)` to `Coletar-Impressoras.ps1`, `Login.tsx`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
+- **Why does `SNMPClient` connect `SNMPClient` to `SNMPResult`, `printers.py`?**
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **Why does `Elgin Impressoras (painel de monitoramento)` connect `Elgin Impressoras (painel de monitoramento)` to `Coletar-Impressoras.ps1`?**
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Why does `public/data/printers.json` connect `Coletar-Impressoras.ps1` to `app-data.tsx`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
-- **Why does `react` connect `useAppData` to `app-data.tsx`, `cn`, `theme.tsx`, `plugins`, `Printer`, `TonerMonitoring.tsx`, `Login.tsx`?**
-  _High betweenness centrality (0.054) - this node is a cross-community bridge._
-- **What connects `$schema`, `typescript`, `oxc` to the rest of the system?**
-  _120 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `SNMPClient` (e.g. with `PrinterCollector` and `FakeAgent`) actually correct?**
+  _`SNMPClient` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `SNMPResult` (e.g. with `PrinterCollector` and `MockSNMPClient`) actually correct?**
+  _`SNMPResult` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `Config`, `Config`, `nextConfig` to the rest of the system?**
+  _137 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `app-data.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.0931174089068826 - nodes in this community are weakly interconnected._
-- **Should `package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.0625 - nodes in this community are weakly interconnected._
-- **Should `cn` be split into smaller, more focused modules?**
-  _Cohesion score 0.08973172987974098 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0629800307219662 - nodes in this community are weakly interconnected._
